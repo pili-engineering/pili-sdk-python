@@ -52,3 +52,20 @@ def get_stream_status(stream_id):
     req = Request(url=url)
     return req
 
+@auth_interface
+def get_segments(stream_id, starttime, endtime):
+    url = (API_HOST +
+           API_VERSION +
+           '/streams/%s/segments?starttime=%s&endtime=%s' % (stream_id, starttime, endtime))
+    req = Request(url=url)
+    return req
+
+@auth_interface
+def delete_segments(stream_id, starttime, endtime):
+    url = (API_HOST +
+           API_VERSION +
+           '/streams/%s/segments?starttime=%s&endtime=%s' % (stream_id, starttime, endtime))
+    req = Request(url=url)
+    req.get_method = lambda: 'DELETE'
+    return req
+

@@ -56,6 +56,7 @@ def auth_interface(method):
         if req.has_data():
             raw_str += req.get_data()
         req.add_header('Authorization', auth.auth_interface_str(raw_str))
+        req.add_header('Content-Type', 'application/json')
         return send_and_decode(req)
     return authed
 

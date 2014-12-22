@@ -1,9 +1,9 @@
 """
 Utils
 """
-from urllib2 import urlopen
-import contextlib
-import json
+from urllib2 import urlopen, HTTPError
+import contextlib, json
+from .errors import APIError
 
 def send_and_decode(req):
     """
@@ -15,7 +15,16 @@ def send_and_decode(req):
     Returns:
         A dict of decoded response
     """
-    with contextlib.closing(urlopen(req)) as res:
+    try:
+        with contextlib.closing(urlopen(req)) as res:
+            raw = res.read()
+            return json.loads(raw)
+    except HTTPError, res:
         raw = res.read()
-        return json.loads(raw)
+        try:
+            data = json.loads(raw)
+        except ValueError:
+            raise APIError(res.code, res.reason)
+        else:
+            raise APIError(data["error"], data["message"])
 
