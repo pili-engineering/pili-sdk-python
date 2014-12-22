@@ -1,4 +1,4 @@
-import api
+import pili.api as api
 
 class Stream(object):
     """
@@ -10,7 +10,7 @@ class Stream(object):
             raise ValueError('invalid key')
         self.__auth__ = auth
         if not stream_id:
-            stream_id =  data["id"]
+            stream_id = data["id"]
         self.__stream_id__ = stream_id
         self.__data__ = data
 
@@ -38,3 +38,4 @@ class Stream(object):
     def status(self):
         res = api.get_stream_status(self.__auth__, stream_id=self.__stream_id__)
         return res
+

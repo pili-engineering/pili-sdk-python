@@ -1,4 +1,4 @@
-import api
+import pili.api as api
 from .stream import Stream
 from .auth import Auth
 
@@ -26,5 +26,4 @@ class Application(object):
             for data in res["streams"]:
                 streams.append(Stream(self.__auth__, data=data))
         return streams
-
 

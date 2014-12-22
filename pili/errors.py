@@ -6,3 +6,4 @@ class APIError(RuntimeError):
         return "Error %d: %s" % (self.code, self.message)
     def __repr__(self):
         return self.__str__()
+
