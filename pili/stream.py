@@ -14,13 +14,10 @@ class Stream(object):
         self.__stream_id__ = stream_id
         self.__data__ = data
 
-    def stream_id(self):
-        return self.__stream_id__
-
-    def data(self):
+    def __getattr__(self, attr):
         if not self.__data__:
-            return self.refresh()
-        return self.__data__
+            self.refresh()
+        return self.__data__[attr]
 
     def refresh(self):
         self.__data__ = api.get_stream(self.__auth__, stream_id=self.__stream_id__)
