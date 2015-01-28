@@ -9,7 +9,7 @@ import json
 
 @auth_interface
 def create_stream(**args):
-    keyword = ['stream_key', 'comment', 'is_private']
+    keyword = ['key', 'comment', 'is_private']
     if set(args) - set(keyword):
         raise ValueError('invalid key')
     encoded = json.dumps(args)
@@ -31,7 +31,7 @@ def get_stream_list():
 
 @auth_interface
 def update_stream(stream_id, **args):
-    keyword = ['stream_key', 'comment', 'is_private']
+    keyword = ['key', 'comment', 'is_private']
     if set(args) - set(keyword):
         raise ValueError('invalid key')
     encoded = json.dumps(args)
