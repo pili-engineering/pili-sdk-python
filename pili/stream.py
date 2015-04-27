@@ -1,4 +1,5 @@
 import pili.api as api
+import pili.conf as conf 
 
 class Stream(object):
     """
@@ -12,6 +13,7 @@ class Stream(object):
         if not stream_id:
             stream_id = data["id"]
         self.__stream_id__ = stream_id
+        self.play = Play(stream_id)
         self.__data__ = data
 
     def __getattr__(self, attr):
@@ -32,7 +34,27 @@ class Stream(object):
         res = api.delete_stream(self.__auth__, stream_id=self.__stream_id__)
         return res
 
-    def status(self):
-        res = api.get_stream_status(self.__auth__, stream_id=self.__stream_id__)
+    def get_segments(self, start_second, end_second):
+        res = api.get_segments(self.__auth__, stream_id=self.__stream_id__, start_second=start_second, end_second=end_second)
         return res
 
+
+class Play(object):
+    """
+    Play is used to get the urls for playing the stream
+    """
+    def __init__(self, stream_id):
+        _, self.__hub__, self.__title__ = stream_id.split('.')
+    def __base__(self, protocol, host, profile):
+        url = "%s://%s/%s/%s" % (protocol, host, self.__hub__, self.__title__)
+        if profile!="":
+            url += "@%s" % profile
+        return url
+    def rtmp_live(self, profile=""):
+        return self.__base__("rtmp", conf.RTMP_PLAY_HOST, profile)
+    def hls_live(self, profile=""):
+        return self.__base__("http", conf.HLS_PLAY_HOST, profile)
+    def hls_playback(self, start_second, end_second, profile=""):
+        url = self.__base__("http", conf.HLS_PLAY_HOST, profile)
+        url += "?start=%d&end=%d" % (start_second, end_second)
+        return url

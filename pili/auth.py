@@ -21,7 +21,7 @@ class Auth(object):
         generate sign str.
         """
         encoded = self.__hmac_sha1(raw_str, self.__secret_key)
-        return 'pili {0}:{1}'.format(self.__access_key, encoded)
+        return 'Qiniu {0}:{1}'.format(self.__access_key, encoded)
 
     @staticmethod
     def __hmac_sha1(data, key):
@@ -49,14 +49,17 @@ def auth_interface(method):
         """
         req = method(**args)
         parsed = urlparse(req.get_full_url())
-        raw_str = parsed.path
+        raw_str = '%s %s' % (req.get_method(), parsed.path)
         if parsed.query:
             raw_str += '?%s' % (parsed.query)
-        raw_str += '\n'
+        raw_str += '\nHost: %s' % (parsed.netloc)
+        if req.has_data():
+            raw_str +=  '\nContent-Type: application/json'
+        raw_str+="\n\n"
         if req.has_data():
             raw_str += req.get_data()
+            req.add_header('Content-Type', 'application/json')
         req.add_header('Authorization', auth.auth_interface_str(raw_str))
-        req.add_header('Content-Type', 'application/json')
         return send_and_decode(req)
     return authed
 
