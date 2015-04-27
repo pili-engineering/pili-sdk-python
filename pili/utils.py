@@ -17,6 +17,8 @@ def send_and_decode(req):
     """
     try:
         with contextlib.closing(urlopen(req)) as res:
+            if res.getcode() == 204:
+                return None
             raw = res.read()
             return json.loads(raw)
     except HTTPError, res:
@@ -24,7 +26,7 @@ def send_and_decode(req):
         try:
             data = json.loads(raw)
         except ValueError:
-            raise APIError(res.code, res.reason)
+            raise APIError(res.reason)
         else:
-            raise APIError(data["error"], data["message"])
+            raise APIError(data["error"])
 
