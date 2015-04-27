@@ -1,5 +1,5 @@
 import pili.api as api
-from .settings import RTMP_PLAY_HOST, HLS_PLAY_HOST
+import pili.conf as conf 
 
 class Stream(object):
     """
@@ -51,10 +51,10 @@ class Play(object):
             url += "@%s" % profile
         return url
     def rtmp_live(self, profile=""):
-        return self.__base__("rtmp", RTMP_PLAY_HOST, profile)
+        return self.__base__("rtmp", conf.RTMP_PLAY_HOST, profile)
     def hls_live(self, profile=""):
-        return self.__base__("http", HLS_PLAY_HOST, profile)
+        return self.__base__("http", conf.HLS_PLAY_HOST, profile)
     def hls_playback(self, start_second, end_second, profile=""):
-        url = self.__base__("http", HLS_PLAY_HOST, profile)
+        url = self.__base__("http", conf.HLS_PLAY_HOST, profile)
         url += "?start=%d&end=%d" % (start_second, end_second)
         return url

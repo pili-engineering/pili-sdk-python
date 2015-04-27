@@ -5,13 +5,18 @@ pili-io Python SDK
 
 Usage:
 -------------
+    from pili import Hub, conf
+
+    conf.RTMP_PLAY_HOST= "pili.rtmp.com"
+
     hub = Hub(access_key = access_key, secret_key = secret_key, hub_name = name)
 
-    res = hub.create_stream();
+    hub.create_stream();
 
     print "get_stream_list"
     for x in hub.streams():
-        print x.id
+        print x.play.rtmp_live("640p")
+        print x.play.rtmp_live()
 
     print "get_stream"
     for x in hub.streams():
