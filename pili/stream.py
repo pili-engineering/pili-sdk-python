@@ -13,8 +13,9 @@ class Stream(object):
         if not stream_id:
             stream_id = data["id"]
         self.__stream_id__ = stream_id
-        self.play = Play(stream_id)
         self.__data__ = data
+        self.play = Play(stream_id)
+        self.publish= Publish(stream_id, self.publishSecurity, self.publishKey)
 
     def __getattr__(self, attr):
         if not self.__data__:
@@ -57,4 +58,24 @@ class Play(object):
     def hls_playback(self, start_second, end_second, profile=""):
         url = self.__base__("http", conf.HLS_PLAY_HOST, profile)
         url += "?start=%d&end=%d" % (start_second, end_second)
+        return url
+
+class Publish(object):
+    """
+    Publish is used to get the urls for publishing the stream
+    """
+    def __init__(self, stream_id, security, key):
+        _, self.__hub__, self.__title__ = stream_id.split('.')
+        self.__security__ = security
+        self.__key__ = key
+    def __base__(self, protocol, host, profile):
+        return url
+    def url(self):
+        url = "rtmp://%s/%s/%s" % (conf.RTMP_PUBLISH_HOST, self.__hub__, self.__title__)
+        if self.__security__ == "static":
+            url += "?key=%s" % self.__key__
+        elif self.__security__ == "dynamic":
+            pass
+        else:
+         return None
         return url
