@@ -4,9 +4,8 @@ auth_interface to create a function with auto generated authentication.
 More Information:
 http://pili-io.github.io/docs/v1/index.html?shell#jie-kou-jian-quan
 """
-import hmac, hashlib, base64
 from urlparse import urlparse
-from .utils import send_and_decode
+from .utils import send_and_decode, __hmac_sha1__
 class Auth(object):
     """
     class Auth store the access_key and secret_key for authentication.
@@ -20,17 +19,8 @@ class Auth(object):
         """
         generate sign str.
         """
-        encoded = self.__hmac_sha1(raw_str, self.__secret_key)
+        encoded = __hmac_sha1__(raw_str, self.__secret_key)
         return 'Qiniu {0}:{1}'.format(self.__access_key, encoded)
-
-    @staticmethod
-    def __hmac_sha1(data, key):
-        """
-        hmac-sha1
-        """
-        hashed = hmac.new(key, data, hashlib.sha1)
-        return base64.urlsafe_b64encode(hashed.digest())
-
 
 def auth_interface(method):
     """
