@@ -4,6 +4,7 @@ Utils
 from urllib2 import urlopen, HTTPError
 import contextlib, json
 from .errors import APIError
+import hmac, hashlib, base64
 
 def send_and_decode(req):
     """
@@ -30,3 +31,9 @@ def send_and_decode(req):
         else:
             raise APIError(data["error"])
 
+def __hmac_sha1__(data, key):
+    """
+    hmac-sha1
+    """
+    hashed = hmac.new(key, data, hashlib.sha1)
+    return base64.urlsafe_b64encode(hashed.digest())
