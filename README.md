@@ -23,7 +23,7 @@ hub = Hub(access_key = access_key, secret_key = secret_key, hub_name = name)
 ```python
 hub.create_stream()
 ```
-or you can specific some arguments like
+or you can specify some arguments like
 
 ```python
 hub.create_stream(title="test", publishSecurity="static")
@@ -107,7 +107,7 @@ stream.play.hls_play_host = host
 ```python
 stream.publish.url()
 ```
-or if you want to specificate the `nonce` when using `dynamic`
+or if you want to specify the `nonce` when using `dynamic`
 ```python
 stream.publish.url(nonce="1")
 ```
