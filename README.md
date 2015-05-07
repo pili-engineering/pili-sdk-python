@@ -1,40 +1,119 @@
 pili-python
-===========
+=============
 
-pili-io Python SDK
+Pili SDK for Python
+
+Installation
+-------------
+Install it from pip
+
+    $ pip install pili
 
 Usage:
 -------------
-    from pili import Hub, conf
+### Setup Hub
+```python
+from pili import Hub
 
-    conf.RTMP_PLAY_HOST= "pili.rtmp.com"
+hub = Hub(access_key = access_key, secret_key = secret_key, hub_name = name)
+```
 
-    hub = Hub(access_key = access_key, secret_key = secret_key, hub_name = name)
+### Create Stream
 
-    hub.create_stream();
+```python
+hub.create_stream()
+```
+or you can specific some arguments like
 
-    print "get_stream_list"
-    for x in hub.streams():
-        print x.play.rtmp_live("640p")
-        print x.play.rtmp_live()
+```python
+hub.create_stream(title="test", publishSecurity="static")
+```
 
-    print "get_stream"
-    for x in hub.streams():
-        print hub.get_stream(stream_id=x.id).id
+### Get Stream
+```python
+stream = hub.get_stream(stream_id=id)
+```
 
-    print "update_stream"
-    for x in hub.streams():
-        x.update(publishKey = "1")
-    for x in hub.streams():
-        print x.id, x.publishKey
+### Update Stream
+```python
+stream.update(publishSecurity="dynamic")
+```
+...or
+```python
+stream.update(publishKey = key)
+```
+...or
+```python
+stream.update(publishKey = key, publishSecurity="dynamic")
+```
 
-    print "get_segments"
-    for x in hub.streams():
-        print x.id, x.get_segments(start_second=0, end_second=1000)
+### Delete Stream
+```python
+stream.delete()
+```
 
-    print "delete_stream"
-    for x in hub.streams():
-        x.delete()
-    for x in hub.streams():
-        print "Error!", x.id
-    print "should be nothing."
+### Get Stream List
+```python
+for s in hub.streams():
+    pass
+```
+
+### Get Stream Segments
+```python
+stream.get_segments(start_second=start, end_second=end)
+```
+
+### Get Stream RTMP Live URL
+
+```python
+stream.play.rtmp_live()
+stream.play.rtmp_live(profile="480p")
+```
+
+You can change RTMP play host by
+
+```python
+stream.play.rtmp_play_host = host
+```
+
+### Get Stream HLS Live URL
+
+```python
+stream.play.hls_live()
+stream.play.hls_live(profile="480p")
+```
+
+You can change HLS play host by
+
+```python
+stream.play.hls_play_host = host
+```
+    
+### Get Stream HLS Playback URL
+
+```python
+stream.play.hls_playback(start, end)
+stream.play.hls_playback(start, end, profile="480p")
+```
+
+You can change HLS play host by
+
+```python
+stream.play.hls_play_host = host
+```
+
+### Get Stream RTMP Publish URL
+
+```python
+stream.publish.url()
+```
+or if you want to specificate the `nonce` when using `dynamic`
+```python
+stream.publish.url(nonce="1")
+```
+
+You can change RTMP publish host by
+
+```python
+stream.play.rtmp_publish_host = host
+```

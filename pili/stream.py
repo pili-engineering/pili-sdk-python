@@ -49,26 +49,19 @@ class Play(object):
     """
     def __init__(self, stream_id):
         _, self.__hub__, self.__title__ = stream_id.split('.')
+        self.rtmp_play_host = conf.RTMP_PLAY_HOST
+        self.hls_play_host = conf.HLS_PLAY_HOST
     def __base__(self, protocol, host, profile):
         url = "%s://%s/%s/%s" % (protocol, host, self.__hub__, self.__title__)
         if profile!="":
             url += "@%s" % profile
         return url
-    def rtmp_live(self, profile="", rtmp_play_host=None):
-        host = conf.RTMP_PLAY_HOST
-        if rtmp_play_host != None:
-            host = rtmp_play_host
-        return self.__base__("rtmp", host, profile)
-    def hls_live(self, profile="", hls_play_host=None):
-        host = conf.HLS_PLAY_HOST
-        if hls_play_host != None:
-            host = hls_play_host
-        return self.__base__("http", host, profile)
-    def hls_playback(self, start_second, end_second, profile="", hls_play_host=None):
-        host = conf.HLS_PLAY_HOST
-        if hls_play_host != None:
-            host = hls_play_host
-        url = self.__base__("http", host, profile)
+    def rtmp_live(self, profile=""):
+        return self.__base__("rtmp", self.rtmp_play_host, profile)
+    def hls_live(self, profile=""):
+        return self.__base__("http", self.hls_play_host, profile)
+    def hls_playback(self, start_second, end_second, profile=""):
+        url = self.__base__("http", self.hls_play_host, profile)
         url += "?start=%d&end=%d" % (start_second, end_second)
         return url
 
@@ -80,13 +73,11 @@ class Publish(object):
         _, self.__hub__, self.__title__ = stream_id.split('.')
         self.__security__ = security
         self.__key__ = str(key)
+        self.rtmp_publish_host = conf.RTMP_PUBLISH_HOST
     def __base__(self, protocol, host, profile):
         return url
-    def url(self, rtmp_publish_host=None, nonce=None):
-        host = conf.RTMP_PUBLISH_HOST
-        if rtmp_publish_host != None:
-            host = rtmp_publish_host
-        url = "rtmp://%s/%s/%s" % (host, self.__hub__, self.__title__)
+    def url(self, nonce=None):
+        url = "rtmp://%s/%s/%s" % (self.rtmp_publish_host, self.__hub__, self.__title__)
         if self.__security__ == "static":
             url += "?key=%s" % self.__key__
         elif self.__security__ == "dynamic":
@@ -99,5 +90,5 @@ class Publish(object):
             url += "&token=%s" % token
             pass
         else:
-         return None
+            return None
         return url
