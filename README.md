@@ -54,7 +54,7 @@ stream.delete()
 
 ### Get Stream List
 ```python
-for s in hub.stream():
+for s in hub.streams():
     pass
 ```
 
@@ -63,7 +63,7 @@ for s in hub.stream():
 stream.get_segments(start_second=start, end_second=end)
 ```
 
-## Get Stream RTMP Live URL
+### Get Stream RTMP Live URL
 
 ```python
 stream.play.rtmp_live()
@@ -102,7 +102,7 @@ You can change HLS play host by
 stream.play.hls_play_host = host
 ```
 
-## Get Stream RTMP Publish URL
+### Get Stream RTMP Publish URL
 
 ```python
 stream.publish.url()
