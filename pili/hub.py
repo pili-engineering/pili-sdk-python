@@ -27,5 +27,3 @@ class Hub(object):
             else:
                 break
             marker = res["marker"]
-
-

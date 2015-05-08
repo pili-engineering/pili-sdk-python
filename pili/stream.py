@@ -1,5 +1,5 @@
 import pili.api as api
-import pili.conf as conf 
+import pili.conf as conf
 import time
 from .utils import __hmac_sha1__
 from urlparse import urlparse
