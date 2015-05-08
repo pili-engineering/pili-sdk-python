@@ -81,7 +81,7 @@ class Publish(object):
         if self.__security__ == "static":
             url += "?key=%s" % self.__key__
         elif self.__security__ == "dynamic":
-            if nonce == None:
+            if nonce is None:
                 nonce = str(int(time.time()*1000))
             url += "?nonce=%s" % nonce
             parsed = urlparse(url)

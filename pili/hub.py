@@ -20,7 +20,7 @@ class Hub():
         marker = None
         while True:
             res = api.get_stream_list(self.__auth__, hub=self.__hub__, marker=marker, limit=None)
-            if res["items"] != None:
+            if res["items"] is not None:
                 for data in res["items"]:
                     yield Stream(self.__auth__, data=data)
             else:
