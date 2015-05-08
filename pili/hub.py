@@ -2,7 +2,8 @@ import pili.api as api
 from .stream import Stream
 from .auth import Auth
 
-class Hub():
+
+class Hub(object):
     def __init__(self, access_key, secret_key, hub_name):
         if not (access_key and secret_key and hub_name):
             raise ValueError('invalid key')
