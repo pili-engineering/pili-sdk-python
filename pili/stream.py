@@ -75,7 +75,7 @@ class Publish(object):
         self.__key__ = str(key)
         self.rtmp_publish_host = conf.RTMP_PUBLISH_HOST
     def __base__(self, protocol, host, profile):
-        return url
+        return url # WTF
     def url(self, nonce=None):
         url = "rtmp://%s/%s/%s" % (self.rtmp_publish_host, self.__hub__, self.__title__)
         if self.__security__ == "static":
