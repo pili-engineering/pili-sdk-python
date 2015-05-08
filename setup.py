@@ -10,7 +10,7 @@ setup(
 
     author = 'fanchenlin',
     author_email = 'fanchenlin@qiniu.com',
-    
+
     packages = find_packages(),
     platforms = 'any',
 )

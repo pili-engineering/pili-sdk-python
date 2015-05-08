@@ -3,7 +3,7 @@ All api for access pili.
 More Info: http://pili-io.github.io/docs/v1/index.html
 """
 from .auth import auth_interface
-import pili.conf as conf 
+import pili.conf as conf
 from urllib2 import Request
 import json
 
@@ -29,7 +29,7 @@ def get_stream_list(**args):
         raise ValueError('invalid key')
     url = "http://%s/%s/streams?" % (conf.API_HOST, conf.API_VERSION)
     for k in args:
-        if args[k] != None:
+        if args[k] is not None:
             url += "&%s=%s" % (k, args[k])
     req = Request(url=url)
     return req
