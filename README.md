@@ -13,25 +13,25 @@ Usage:
 -------------
 ### Setup Hub
 ```python
-from pili import Hub
+from pili import *
 
-hub = Hub(access_key = access_key, secret_key = secret_key, hub_name = name)
+conf.AUTH = Auth(access_key, secret_key)
 ```
 
 ### Create Stream
 
 ```python
-hub.create_stream()
+create_stream(hub_name)
 ```
 or you can specify some arguments like
 
 ```python
-hub.create_stream(title="test", publishSecurity="static")
+create_stream(hub_name, title="test", publishSecurity="static")
 ```
 
 ### Get Stream
 ```python
-stream = hub.get_stream(stream_id=id)
+stream = get_stream(stream_id=id)
 ```
 
 ### Update Stream
@@ -54,7 +54,7 @@ stream.delete()
 
 ### Get Stream List
 ```python
-for s in hub.streams():
+for s in streams(hub_name):
     pass
 ```
 

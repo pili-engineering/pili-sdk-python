@@ -4,8 +4,10 @@ auth_interface to create a function with auto generated authentication.
 More Information:
 http://pili-io.github.io/docs/v1/index.html?shell#jie-kou-jian-quan
 """
+import pili.conf as conf
 from urlparse import urlparse
 from .utils import send_and_decode, __hmac_sha1__
+
 class Auth(object):
     """
     class Auth store the access_key and secret_key for authentication.
@@ -31,9 +33,9 @@ def auth_interface(method):
         func(**args) -> Request
 
     Returns:
-        func(auth, **args) -> dict (decoded json)
+        func(**args) -> dict (decoded json)
     """
-    def authed(auth, **args):
+    def authed(**args):
         """
         send request and decode response. Return the result in python format.
         """
@@ -49,7 +51,7 @@ def auth_interface(method):
         if req.has_data():
             raw_str += req.get_data()
             req.add_header('Content-Type', 'application/json')
-        req.add_header('Authorization', auth.auth_interface_str(raw_str))
+        req.add_header('Authorization', conf.AUTH.auth_interface_str(raw_str))
         return send_and_decode(req)
     return authed
 

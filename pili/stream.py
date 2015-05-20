@@ -9,10 +9,9 @@ class Stream(object):
     Stream is used to control a stream. You should always create a Stream object by the
     interfaces of an application.
     """
-    def __init__(self, auth, stream_id=None, data=None):
-        if not (auth and (stream_id or data)):
+    def __init__(self, stream_id=None, data=None):
+        if not (stream_id or data):
             raise ValueError('invalid key')
-        self.__auth__ = auth
         if not stream_id:
             stream_id = data["id"]
         self.__stream_id__ = stream_id
@@ -26,20 +25,20 @@ class Stream(object):
         return self.__data__[attr]
 
     def refresh(self):
-        self.__data__ = api.get_stream(self.__auth__, stream_id=self.__stream_id__)
+        self.__data__ = api.get_stream(stream_id=self.__stream_id__)
         return self.__data__
 
     def update(self, **args):
-        res = api.update_stream(self.__auth__, stream_id=self.__stream_id__, **args)
+        res = api.update_stream(stream_id=self.__stream_id__, **args)
         self.__data__ = res
         return res
 
     def delete(self):
-        res = api.delete_stream(self.__auth__, stream_id=self.__stream_id__)
+        res = api.delete_stream( stream_id=self.__stream_id__)
         return res
 
     def get_segments(self, start_second, end_second):
-        res = api.get_segments(self.__auth__, stream_id=self.__stream_id__, start_second=start_second, end_second=end_second)
+        res = api.get_segments(stream_id=self.__stream_id__, start_second=start_second, end_second=end_second)
         return res
 
 

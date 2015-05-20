@@ -1,2 +1,4 @@
 from .errors import APIError
-from .hub import Hub
+from .auth import Auth
+from .hub import create_stream, get_stream, streams
+import conf
