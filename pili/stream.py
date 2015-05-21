@@ -4,6 +4,24 @@ import time
 from .utils import __hmac_sha1__
 from urlparse import urlparse
 
+def create_stream(hub=conf.HUB, **args):
+    res = api.create_stream(hub=hub, **args)
+    return Stream(data=res)
+
+def get_stream(stream_id):
+    return Stream(stream_id=stream_id)
+
+def streams(hub=conf.HUB, limit=None):
+    marker = None
+    while True:
+        res = api.get_stream_list(hub=hub, marker=marker, limit=None)
+        if res["items"] is not None:
+            for data in res["items"]:
+                yield Stream(data=data)
+        else:
+            break
+        marker = res["marker"]
+
 class Stream(object):
     """
     Stream is used to control a stream. You should always create a Stream object by the
