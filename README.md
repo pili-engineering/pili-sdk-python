@@ -11,7 +11,7 @@ Install it from pip
 
 Usage:
 -------------
-### Setup Hub
+### Init Setup
 ```python
 from pili import *
 

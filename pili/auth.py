@@ -1,8 +1,6 @@
 """
 Auth provide class Auth for authentication account. You can use decorator
 auth_interface to create a function with auto generated authentication.
-More Information:
-http://pili-io.github.io/docs/v1/index.html?shell#jie-kou-jian-quan
 """
 import pili.conf as conf
 from urlparse import urlparse
