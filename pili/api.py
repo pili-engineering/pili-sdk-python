@@ -51,6 +51,11 @@ def delete_stream(stream_id):
     return req
 
 @auth_interface
+def get_status(stream_id):
+    url = "http://%s/%s/streams/%s/status" % (conf.API_HOST, conf.API_VERSION, stream_id)
+    return Request(url=url)
+
+@auth_interface
 def get_segments(stream_id, start_second, end_second):
     url = "http://%s/%s/streams/%s/segments?start=%s&end=%s" % (conf.API_HOST, conf.API_VERSION, stream_id, start_second, end_second)
     return Request(url=url)

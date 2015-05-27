@@ -52,7 +52,11 @@ class Stream(object):
         return res
 
     def delete(self):
-        res = api.delete_stream( stream_id=self.__stream_id__)
+        res = api.delete_stream(stream_id=self.__stream_id__)
+        return res
+
+    def status(self):
+        res = api.get_status(stream_id=self.__stream_id__)
         return res
 
     def get_segments(self, start_second, end_second):
