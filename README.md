@@ -1,7 +1,7 @@
-pili-python
+pili-sdk-python
 =============
 
-Pili SDK for Python
+Pili server-side library for Python.
 
 Installation
 -------------
