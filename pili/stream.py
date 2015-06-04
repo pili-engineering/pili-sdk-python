@@ -59,7 +59,7 @@ class Stream(object):
         res = api.get_status(stream_id=self.__stream_id__)
         return res
 
-    def get_segments(self, start_second, end_second):
+    def get_segments(self, start_second=None, end_second=None):
         res = api.get_segments(stream_id=self.__stream_id__, start_second=start_second, end_second=end_second)
         return res
 
