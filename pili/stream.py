@@ -40,7 +40,7 @@ class Stream(object):
     def __getattr__(self, attr):
         if not self.__data__:
             self.refresh()
-        return self.__data__[attr]
+        return self.__data__ if attr == "data" else self.__data__[attr]
 
     def refresh(self):
         self.__data__ = api.get_stream(stream_id=self.__stream_id__)
