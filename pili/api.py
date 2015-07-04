@@ -9,7 +9,6 @@ import json
 
 @auth_interface
 def create_stream(**args):
-    print conf.API_HOST
     keyword = ['hub', 'title', 'publishKey', 'publishSecurity']
     if set(args) - set(keyword):
         raise ValueError('invalid key')

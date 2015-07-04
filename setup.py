@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'pili',
-    version = '0.0.5',
+    version = '0.0.6',
     keywords = ('pili'),
     description = 'SDK for pili',
     license = 'MIT License',
