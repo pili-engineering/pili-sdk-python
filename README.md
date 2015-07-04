@@ -1,7 +1,7 @@
-pili-python
+pili-sdk-python
 =============
 
-Pili SDK for Python
+Pili server-side library for Python.
 
 Installation
 -------------
@@ -95,7 +95,7 @@ stream.play.hls_playback(start, end, profile="480p")
 ### Get Stream RTMP Publish URL
 
 ```python
-stream.play.rtmp_publish_host = host
+stream.publish.rtmp_publish_host = host
 
 stream.publish.url()
 ```

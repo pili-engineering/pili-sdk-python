@@ -40,7 +40,7 @@ class Stream(object):
     def __getattr__(self, attr):
         if not self.__data__:
             self.refresh()
-        return self.__data__[attr]
+        return self.__data__ if attr == "data" else self.__data__[attr]
 
     def refresh(self):
         self.__data__ = api.get_stream(stream_id=self.__stream_id__)
@@ -59,7 +59,7 @@ class Stream(object):
         res = api.get_status(stream_id=self.__stream_id__)
         return res
 
-    def get_segments(self, start_second, end_second):
+    def get_segments(self, start_second=None, end_second=None):
         res = api.get_segments(stream_id=self.__stream_id__, start_second=start_second, end_second=end_second)
         return res
 

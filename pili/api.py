@@ -55,6 +55,8 @@ def get_status(stream_id):
     return Request(url=url)
 
 @auth_interface
-def get_segments(stream_id, start_second, end_second):
-    url = "http://%s/%s/streams/%s/segments?start=%s&end=%s" % (conf.API_HOST, conf.API_VERSION, stream_id, start_second, end_second)
+def get_segments(stream_id, start_second=None, end_second=None):
+    url = "http://%s/%s/streams/%s/segments" % (conf.API_HOST, conf.API_VERSION, stream_id)
+    if start_second and end_second:
+        url += "?start=%s&end=%s" % (start_second, end_second)
     return Request(url=url)
