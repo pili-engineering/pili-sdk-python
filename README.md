@@ -15,23 +15,23 @@ Usage:
 ```python
 from pili import *
 
-conf.AUTH = Auth(access_key, secret_key)
+clt = Client(access_key, secret_key, hub_name)
 ```
 
 ### Create Stream
 
 ```python
-create_stream(hub_name)
+clt.create_stream()
 ```
 or you can specify some arguments like
 
 ```python
-create_stream(hub_name, title="test", publishSecurity="static")
+clt.create_stream(title="test", publishSecurity="static")
 ```
 
 ### Get Stream
 ```python
-stream = get_stream(stream_id=id)
+clt.stream = get_stream(stream_id=id)
 ```
 
 ### Update Stream
@@ -54,54 +54,41 @@ stream.delete()
 
 ### Get Stream List
 ```python
-for s in streams(hub_name):
+res = clt.list_streams()
+for s in res["items"]:
     pass
+next = clt.list_streams(marker=res["marker"])
 ```
 
 ### Get Stream Segments
 ```python
-stream.get_segments(start_second=start, end_second=end)
+stream.segments(start_second=start, end_second=end)
 ```
 
 ### Get Stream RTMP Live URL
 
 ```python
-stream.play.rtmp_play_host = host
-
-stream.play.rtmp_live()
-stream.play.rtmp_live(profile="480p")
+stream.rtmp_live_url()
 ```
 
 ### Get Stream HLS Live URL
 
 ```python
-stream.play.hls_play_host = host
-
-stream.play.hls_live()
-stream.play.hls_live(profile="480p")
+stream.play.hls_live_hls()
 ```
-
-You can change HLS play host by
     
 ### Get Stream HLS Playback URL
 
 ```python
-stream.play.hls_play_host = host
-
-stream.play.hls_playback(start, end)
-stream.play.hls_playback(start, end, profile="480p")
+stream.play.hls_playback_url(start, end)
 ```
 
 ### Get Stream RTMP Publish URL
 
 ```python
-stream.publish.rtmp_publish_host = host
-
-stream.publish.url()
+stream.rtmp_publish_url()
 ```
 or if you want to specify the `nonce` when using `dynamic`
 ```python
-stream.play.rtmp_publish_host = host
-
-stream.publish.url(nonce="1")
+stream.rtmp_publish_url(nonce="1")
 ```

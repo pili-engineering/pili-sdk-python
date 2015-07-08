@@ -33,7 +33,7 @@ def auth_interface(method):
     Returns:
         func(**args) -> dict (decoded json)
     """
-    def authed(**args):
+    def authed(auth, **args):
         """
         send request and decode response. Return the result in python format.
         """
@@ -49,7 +49,7 @@ def auth_interface(method):
         if req.has_data():
             raw_str += req.get_data()
             req.add_header('Content-Type', 'application/json')
-        req.add_header('Authorization', conf.AUTH.auth_interface_str(raw_str))
+        req.add_header('Authorization', auth.auth_interface_str(raw_str))
         return send_and_decode(req)
     return authed
 
