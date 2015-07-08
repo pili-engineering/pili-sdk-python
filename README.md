@@ -31,7 +31,7 @@ clt.create_stream(title="test", publishSecurity="static")
 
 ### Get Stream
 ```python
-clt.stream = get_stream(stream_id=id)
+stream = clt.get_stream(stream_id=id)
 ```
 
 ### Update Stream
