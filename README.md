@@ -74,13 +74,13 @@ stream.rtmp_live_url()
 ### Get Stream HLS Live URL
 
 ```python
-stream.play.hls_live_hls()
+stream.hls_live_hls()
 ```
     
 ### Get Stream HLS Playback URL
 
 ```python
-stream.play.hls_playback_url(start, end)
+stream.hls_playback_url(start, end)
 ```
 
 ### Get Stream RTMP Publish URL
