@@ -68,19 +68,19 @@ stream.segments(start_second=start, end_second=end)
 ### Get Stream RTMP Live URL
 
 ```python
-stream.rtmp_live_url()
+stream.rtmp_live_urls()
 ```
 
 ### Get Stream HLS Live URL
 
 ```python
-stream.hls_live_hls()
+stream.hls_live_urls()
 ```
     
 ### Get Stream HLS Playback URL
 
 ```python
-stream.hls_playback_url(start, end)
+stream.hls_playback_urls(start, end)
 ```
 
 ### Get Stream RTMP Publish URL

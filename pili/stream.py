@@ -1,8 +1,10 @@
 import pili.api as api
 import pili.conf as conf
-import time
 from .utils import __hmac_sha1__
 from urlparse import urlparse
+import json
+import time
+
 
 class Stream(object):
     """
@@ -50,20 +52,28 @@ class Stream(object):
             url += "@%s" % profile
         return url
 
-    def rtmp_live_url(self):
+    def rtmp_live_urls(self):
         res = dict()
-        res["origin"] = self.__base__("rtmp", self.hosts["play"]["rtmp"], "")
+        res["ORIGIN"] = self.__base__("rtmp", self.hosts["play"]["rtmp"], "")
         for profile in self.profiles:
             res[profile] = self.__base__("rtmp", self.hosts["play"]["rtmp"], profile)
         return res
 
-    def hls_live_url(self):
-        return self.__base__("http", self.hosts["play"]["hls"], "")
+    def hls_live_urls(self):
+        res = dict()
+        res["ORIGIN"] = self.__base__("http", self.hosts["play"]["hls"], "")
+        for profile in self.profiles:
+            res[profile] = self.__base__("http", self.hosts["play"]["hls"], profile)
+        return res
 
-    def hls_playback_url(self, start_second, end_second):
-        url = self.__base__("http", self.hosts["play"]["hls"], "")
-        url += "?start=%d&end=%d" % (start_second, end_second)
-        return url
+    def hls_playback_urls(self, start_second, end_second):
+        res = dict()
+        res["ORIGIN"] = self.__base__("http", self.hosts["play"]["hls"], "")
+        for profile in self.profiles:
+            url = self.__base__("http", self.hosts["play"]["hls"], profile)
+            url += "?start=%d&end=%d" % (start_second, end_second)
+            res[profile] = url
+        return res
 
     def rtmp_publish_url(self, nonce=None):
         url = "rtmp://%s/%s/%s" % (self.hosts["publish"]["rtmp"], self.hub, self.title)
@@ -77,7 +87,9 @@ class Stream(object):
             data = "%s?%s" % (parsed.path, parsed.query)
             token = __hmac_sha1__(data, str(self.publishKey))
             url += "&token=%s" % token
-            pass
         else:
             return None
         return url
+
+    def to_json_string(self):
+        return json.dumps(self.data)
