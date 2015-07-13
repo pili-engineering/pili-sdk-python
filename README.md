@@ -88,7 +88,7 @@ next = clt.list_streams(marker=res["marker"])
 stream.update(publishKey = key, publishSecurity="dynamic")
 ```
 
-### Delete a stream
+#### Delete a stream
 ```python
 stream.delete()
 ```
