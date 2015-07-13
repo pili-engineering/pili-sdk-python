@@ -98,7 +98,7 @@ stream.delete()
 stream.status()
 ```
 
-### Get stream segments
+#### Get stream segments
 ```python
 # start : optional
 # end   : optional
@@ -106,22 +106,22 @@ stream.status()
 stream.segments(start_second=start, end_second=end)
 ```
 
-### Generate RTMP publish URL
+#### Generate RTMP publish URL
 ```python
 stream.rtmp_publish_url()
 ```
 
-### Generate RTMP live play URL
+#### Generate RTMP live play URL
 ```python
 stream.rtmp_live_urls()
 ```
 
-### Generate HLS live play URL
+#### Generate HLS live play URL
 ```python
 stream.hls_live_urls()
 ```
     
-### Generate HLS playback URL
+#### Generate HLS playback URL
 
 ```python
 stream.hls_playback_urls(start, end)
