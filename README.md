@@ -48,7 +48,7 @@ access_key = 'qiniu_access_key'
 secret_key = 'qiniu_secret_key'
 hub_name   = 'hub_name'
 
-clt = Client(access_key, secret_key, hub_name)
+client = Client(access_key, secret_key, hub_name)
 ```
 
 #### Create a stream
@@ -57,25 +57,28 @@ clt = Client(access_key, secret_key, hub_name)
 # title          : optional
 # publishKey     : optional
 # publishSecrity : optional
-clt.create_stream(title="test", publishKey="abc", publishSecurity="static")
+stream = client.create_stream(title="test", publishKey="abc", publishSecurity="static")
+# stream object
 ```
 
 #### Get a stream
 
 ```python
 # stream_id: required
-stream = clt.get_stream(stream_id=id)
+stream = client.get_stream(stream_id=id)
+# stream object
 ```
 
 #### List streams
 ```python
 # marker : optional
 # limit  : optional
-res = clt.list_streams()
+res = client.list_streams()
 for s in res["items"]:
+    # stream object
     # Do someting...
     pass
-next = clt.list_streams(marker=res["marker"])
+next = client.list_streams(marker=res["marker"])
 ```
 
 ### Stream
@@ -95,7 +98,12 @@ stream.delete()
 
 #### Get stream status
 ```python
-stream.status()
+status = stream.status()
+print status
+# {
+#     "addr": "106.187.43.211:51393",
+#     "status": "disconnected"
+# }
 ```
 
 #### Get stream segments
@@ -103,27 +111,46 @@ stream.status()
 # start : optional
 # end   : optional
 # ...but you must provide both or none of the arguments.
-stream.segments(start_second=start, end_second=end)
+segments = stream.segments(start_second=start, end_second=end)
+print segments
+# [
+#     {
+#         "start": <StartSecond>,
+#         "end": <EndSecond>
+#     },
+#     {
+#         "start": <StartSecond>,
+#         "end": <EndSecond>
+#     },
+#     ...
+# ]
 ```
 
 #### Generate RTMP publish URL
 ```python
-stream.rtmp_publish_url()
+url = stream.rtmp_publish_url()
+print url
 ```
 
 #### Generate RTMP live play URL
 ```python
-stream.rtmp_live_urls()
+urls = stream.rtmp_live_urls()
+for k in urls:
+    print k, ":", urls[k]
 ```
 
 #### Generate HLS live play URL
 ```python
-stream.hls_live_urls()
+urls = stream.hls_live_urls()
+for k in urls:
+    print k, ":", urls[k]
 ```
     
 #### Generate HLS playback URL
 
 ```python
-stream.hls_playback_urls(start, end)
+urls = stream.hls_playback_urls(start, end)
+for k in urls:
+    print k, ":", urls[k]
 ```
 
