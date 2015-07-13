@@ -12,22 +12,22 @@
 
 ## Content
 
-- [Installation](#Installation)
-- [Usage](#Usage)
-    - [Client](#Client)
-        - [Create a Pili client](#Create-a-Pili-client)
-        - [Create a stream](#Create-a-stream)
-        - [Get a stream](#Get-a-stream)
-        - [List streams](#List-streams)
-    - [Stream](#Stream)
-        - [Update a stream](#Update-a-stream)
-        - [Delete a stream](#Delete-a-stream)
-        - [Get stream segments](#Get-stream-segments)
-        - [Get stream status](#Get-stream-status)
-        - [Generate RTMP publish URL](#Generate-RTMP-publish-URL)
-        - [Generate RTMP live play URL](#Generate-RTMP-live-play-URL)
-        - [Generate HLS live play URL](#Generate-HLS-live-play-URL)
-        - [Generate HLS playback URL](#Generate-HLS-playback-URL)
+- [Installation](#installation)
+- [Usage](#usage)
+    - [Client](#client)
+        - [Create a Pili client](#create-a-pili-client)
+        - [Create a stream](#create-a-stream)
+        - [Get a stream](#get-a-stream)
+        - [List streams](#list-streams)
+    - [Stream](#stream)
+        - [Update a stream](#update-a-stream)
+        - [Delete a stream](#delete-a-stream)
+        - [Get stream segments](#get-stream-segments)
+        - [Get stream status](#get-stream-status)
+        - [Generate RTMP publish URL](#generate-rtmp-publish-url)
+        - [Generate RTMP live play URL](#generate-rtmp-live-play-url)
+        - [Generate HLS live play URL](#generate-hls-live-play-url)
+        - [Generate HLS playback URL](#generate-hls-playback-url)
 
 ## Installation
 
