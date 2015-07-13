@@ -58,7 +58,7 @@ client = Client(access_key, secret_key, hub_name)
 # publishKey     : optional
 # publishSecrity : optional
 stream = client.create_stream(title="test", publishKey="abc", publishSecurity="static")
-# stream object
+# return stream object...
 ```
 
 #### Get a stream
@@ -66,7 +66,7 @@ stream = client.create_stream(title="test", publishKey="abc", publishSecurity="s
 ```python
 # stream_id: required
 stream = client.get_stream(stream_id=id)
-# stream object
+# return stream object...
 ```
 
 #### List streams
@@ -75,7 +75,7 @@ stream = client.get_stream(stream_id=id)
 # limit  : optional
 res = client.list_streams()
 for s in res["items"]:
-    # stream object
+    # s is stream object...
     # Do someting...
     pass
 next = client.list_streams(marker=res["marker"])
