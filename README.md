@@ -1,107 +1,156 @@
-pili-sdk-python
-=============
+# Pili server-side library for Python.
 
-Pili server-side library for Python.
+## Features
 
-Installation
--------------
-Install it from pip
+- [x] Stream operations (Create, Delete, Update, Get)
+- [x] Get Streams list
+- [x] Get Stream status
+- [x] Get Stream segments
+- [x] Generate RTMP publish URL
+- [x] Generate RTMP / HLS live play URL
+- [x] Generate HLS playback URL
 
-    $ pip install pili
+## Content
 
-Usage:
--------------
-### Init Setup
+- [Installation](#installation)
+- [Usage](#usage)
+    - [Client](#client)
+        - [Create a Pili client](#create-a-pili-client)
+        - [Create a stream](#create-a-stream)
+        - [Get a stream](#get-a-stream)
+        - [List streams](#list-streams)
+    - [Stream](#stream)
+        - [Update a stream](#update-a-stream)
+        - [Delete a stream](#delete-a-stream)
+        - [Get stream segments](#get-stream-segments)
+        - [Get stream status](#get-stream-status)
+        - [Generate RTMP publish URL](#generate-rtmp-publish-url)
+        - [Generate RTMP live play URL](#generate-rtmp-live-play-url)
+        - [Generate HLS live play URL](#generate-hls-live-play-url)
+        - [Generate HLS playback URL](#generate-hls-playback-url)
+
+## Installation
+
+```
+$ pip install pili
+```
+
+## Usage:
+
+### Client
+
+#### Create a Pili client
+
 ```python
 from pili import *
 
-conf.AUTH = Auth(access_key, secret_key)
+access_key = 'qiniu_access_key' 
+secret_key = 'qiniu_secret_key'
+hub_name   = 'hub_name'
+
+client = Client(access_key, secret_key, hub_name)
 ```
 
-### Create Stream
+#### Create a stream
 
 ```python
-create_stream(hub_name)
-```
-or you can specify some arguments like
-
-```python
-create_stream(hub_name, title="test", publishSecurity="static")
-```
-
-### Get Stream
-```python
-stream = get_stream(stream_id=id)
+# title          : optional
+# publishKey     : optional
+# publishSecrity : optional
+stream = client.create_stream(title="test", publishKey="abc", publishSecurity="static")
+# return stream object...
 ```
 
-### Update Stream
+#### Get a stream
+
 ```python
-stream.update(publishSecurity="dynamic")
+# stream_id: required
+stream = client.get_stream(stream_id=id)
+# return stream object...
 ```
-...or
+
+#### List streams
 ```python
-stream.update(publishKey = key)
+# marker : optional
+# limit  : optional
+res = client.list_streams()
+for s in res["items"]:
+    # s is stream object...
+    # Do someting...
+    pass
+next = client.list_streams(marker=res["marker"])
 ```
-...or
+
+### Stream
+
+#### Update a stream
 ```python
+# publishKey     : optional
+# publishSecrity : optional
+# disabled       : optional
 stream.update(publishKey = key, publishSecurity="dynamic")
 ```
 
-### Delete Stream
+#### Delete a stream
 ```python
 stream.delete()
 ```
 
-### Get Stream List
+#### Get stream status
 ```python
-for s in streams(hub_name):
-    pass
+status = stream.status()
+print status
+# {
+#     "addr": "106.187.43.211:51393",
+#     "status": "disconnected"
+# }
 ```
 
-### Get Stream Segments
+#### Get stream segments
 ```python
-stream.get_segments(start_second=start, end_second=end)
+# start : optional
+# end   : optional
+# ...but you must provide both or none of the arguments.
+segments = stream.segments(start_second=start, end_second=end)
+print segments
+# [
+#     {
+#         "start": <StartSecond>,
+#         "end": <EndSecond>
+#     },
+#     {
+#         "start": <StartSecond>,
+#         "end": <EndSecond>
+#     },
+#     ...
+# ]
 ```
 
-### Get Stream RTMP Live URL
-
+#### Generate RTMP publish URL
 ```python
-stream.play.rtmp_play_host = host
-
-stream.play.rtmp_live()
-stream.play.rtmp_live(profile="480p")
+url = stream.rtmp_publish_url()
+print url
 ```
 
-### Get Stream HLS Live URL
-
+#### Generate RTMP live play URL
 ```python
-stream.play.hls_play_host = host
-
-stream.play.hls_live()
-stream.play.hls_live(profile="480p")
+urls = stream.rtmp_live_urls()
+for k in urls:
+    print k, ":", urls[k]
 ```
 
-You can change HLS play host by
+#### Generate HLS live play URL
+```python
+urls = stream.hls_live_urls()
+for k in urls:
+    print k, ":", urls[k]
+```
     
-### Get Stream HLS Playback URL
+#### Generate HLS playback URL
 
 ```python
-stream.play.hls_play_host = host
-
-stream.play.hls_playback(start, end)
-stream.play.hls_playback(start, end, profile="480p")
+urls = stream.hls_playback_urls(start, end)
+for k in urls:
+    print k, ":", urls[k]
 ```
 
-### Get Stream RTMP Publish URL
-
-```python
-stream.publish.rtmp_publish_host = host
-
-stream.publish.url()
-```
-or if you want to specify the `nonce` when using `dynamic`
-```python
-stream.play.rtmp_publish_host = host
-
-stream.publish.url(nonce="1")
-```

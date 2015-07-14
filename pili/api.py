@@ -35,7 +35,7 @@ def get_stream_list(**args):
 
 @auth_interface
 def update_stream(stream_id, **args):
-    keyword = ['publishKey', 'publishSecurity']
+    keyword = ['publishKey', 'publishSecurity', 'disabled']
     if set(args) - set(keyword):
         raise ValueError('invalid key')
     encoded = json.dumps(args)
