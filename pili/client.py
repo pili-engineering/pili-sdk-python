@@ -21,14 +21,3 @@ class Client(object):
             items.append(Stream(self.__auth__, stream_id=data["id"]))
         res["items"] = items
         return res
-
-#def streams(hub=conf.HUB, limit=None):
-#    marker = None
-#    while True:
-#        res = api.get_stream_list(hub=hub, marker=marker, limit=None)
-#        if res["items"] is not None:
-#            for data in res["items"]:
-#                yield Stream(data=data)
-#        else:
-#            break
-#        marker = res["marker"]#

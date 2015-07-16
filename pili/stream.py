@@ -75,7 +75,9 @@ class Stream(object):
 
     def hls_playback_urls(self, start_second, end_second):
         res = dict()
-        res["ORIGIN"] = self.__base__("http", self.hosts["play"]["hls"], "")
+        url = self.__base__("http", self.hosts["play"]["hls"], "")
+        url += "?start=%d&end=%d" % (start_second, end_second)
+        res["ORIGIN"] = url
         if self.profiles!=None:
             for profile in self.profiles:
                 url = self.__base__("http", self.hosts["play"]["hls"], profile)
