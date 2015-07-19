@@ -141,7 +141,7 @@ for k in urls:
     print k, ":", urls[k]
 
 # Get original HLS playback url
-originalUrl := urls["ORIGIN"]
+original_url = urls["ORIGIN"]
 ```
 
 #### Generate HLS live play URL
@@ -151,7 +151,7 @@ for k in urls:
     print k, ":", urls[k]
 
 # Get original HLS playback url
-originalUrl := urls["ORIGIN"]
+original_url = urls["ORIGIN"]
 ```
     
 #### Generate HLS playback URL
@@ -162,6 +162,6 @@ for k in urls:
     print k, ":", urls[k]
 
 # Get original HLS playback url
-originalUrl := urls["ORIGIN"]
+original_url = urls["ORIGIN"]
 ```
 
