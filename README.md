@@ -139,6 +139,9 @@ print url
 urls = stream.rtmp_live_urls()
 for k in urls:
     print k, ":", urls[k]
+
+// Get original HLS playback url
+originalUrl := urls["ORIGIN"]
 ```
 
 #### Generate HLS live play URL
@@ -146,6 +149,9 @@ for k in urls:
 urls = stream.hls_live_urls()
 for k in urls:
     print k, ":", urls[k]
+
+// Get original HLS playback url
+originalUrl := urls["ORIGIN"]
 ```
     
 #### Generate HLS playback URL
@@ -154,5 +160,8 @@ for k in urls:
 urls = stream.hls_playback_urls(start, end)
 for k in urls:
     print k, ":", urls[k]
+
+// Get original HLS playback url
+originalUrl := urls["ORIGIN"]
 ```
 
