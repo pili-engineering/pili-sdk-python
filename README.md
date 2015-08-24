@@ -96,6 +96,16 @@ next = hub.list_streams(marker=res["marker"])
 stream.update(publishKey = key, publishSecurity="dynamic")
 ```
 
+#### Disable a stream
+```python
+stream.disable()
+```
+
+#### Enable a stream
+```python
+stream.enable()
+```
+
 #### Delete a stream
 ```python
 stream.delete()
