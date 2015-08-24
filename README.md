@@ -11,11 +11,11 @@
     - [x] stream.update()
     - [x] stream.disable()
     - [x] stream.enable()
-    - [x] stream.status()
     - [x] stream.rtmp_publish_url()
     - [x] stream.rtmp_live_urls()
     - [x] stream.hls_live_urls()
     - [x] stream.http_flv_live_urls()
+    - [x] stream.status()
     - [x] stream.segments()
     - [x] stream.hls_playback_urls()
     - [x] stream.snapshot()
@@ -38,11 +38,11 @@
         - [Update a Stream](#update-a-stream)
         - [Disable a Stream](#disable-a-stream)
         - [Enable a Stream](#enable-a-stream)
-        - [Get Stream status](#get-stream-status)
         - [Generate RTMP publish URL](#generate-rtmp-publish-url)
         - [Generate RTMP live play URLs](#generate-rtmp-live-play-urls)
         - [Generate HLS live play URLs](generate-hls-live-play-urls)
         - [Generate Http-Flv live play URLs](generate-http-flv-live-play-urls)
+        - [Get Stream status](#get-stream-status)
         - [Get Stream segments](#get-stream-segments)
         - [Generate HLS playback URLs](generate-hls-playback-urls)
         - [Save Stream as a file](#save-stream-as-a-file)
@@ -212,23 +212,6 @@ stream.disable()
 stream.enable()
 ```
 
-#### Get Stream status
-
-```python
-status = stream.status()
-print status
-# {
-#     "addr": "222.73.202.226:2572",
-#     "status": "connected",
-#     "bytesPerSecond": 16870.200000000001,
-#     "framesPerSecond": { 
-#         "audio": 42.200000000000003,
-#         "video": 14.733333333333333,
-#         "data": 0.066666666666666666,
-#     }
-# }
-```
-
 #### Generate RTMP publish URL
 
 ```python
@@ -271,6 +254,23 @@ for k in urls:
 # Get original Http-Flv live url
 original_url = urls["ORIGIN"]
 # {"ORIGIN": "http://e4kvkh.live1-http.z1.pili.qiniucdn.com/test-origin/55db52e1e3ba573b2000000e.flv"}
+```
+
+#### Get Stream status
+
+```python
+status = stream.status()
+print status
+# {
+#     "addr": "222.73.202.226:2572",
+#     "status": "connected",
+#     "bytesPerSecond": 16870.200000000001,
+#     "framesPerSecond": { 
+#         "audio": 42.200000000000003,
+#         "video": 14.733333333333333,
+#         "data": 0.066666666666666666,
+#     }
+# }
 ```
 
 #### Get Stream segments
@@ -362,11 +362,11 @@ stream.delete()
         - stream.update()
         - stream.disable()
         - stream.enable()
-        - stream.status()
         - stream.rtmp_publish_url()
         - stream.rtmp_live_urls()
         - stream.hls_live_urls()
         - stream.http_flv_live_urls()
+        - stream.status()
         - stream.segments()
         - stream.hls_playback_urls()
         - stream.snapshot()
