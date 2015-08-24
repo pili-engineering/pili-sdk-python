@@ -96,6 +96,29 @@ hub = Hub(credentials, hub_name)
 # publishSecrity : optional, string, can be "dynamic" or "static", "dynamic" as default
 stream = hub.create_stream(title=None, publishKey=None, publishSecurity="static")
 # return stream object...
+print "\ncreate_stream()\n", stream.to_json()
+# {
+#   "publishSecurity": "dynamic",
+#   "hub": "test-origin",
+#   "title": "55db4a9ee3ba573b20000004",
+#   "publishKey": "976655fbf3bee71e",
+#   "disabled": false,
+#   "hosts": {
+#     "live": {
+#       "http": "e4kvkh.live1-http.z1.pili.qiniucdn.com",
+#       "rtmp": "e4kvkh.live1-rtmp.z1.pili.qiniucdn.com"
+#     },
+#     "playback": {
+#       "http": "e4kvkh.playback1.z1.pili.qiniucdn.com"
+#     },
+#     "publish": {
+#       "rtmp": "e4kvkh.publish.z1.pili.qiniup.com"
+#     }
+#   },
+#   "updatedAt": "2015-08-24T16:47:26.786Z",
+#   "id": "z1.test-origin.55db4a9ee3ba573b20000004",
+#   "createdAt": "2015-08-24T16:47:26.786Z"
+# }
 ```
 
 #### Get a Stream
@@ -104,6 +127,8 @@ stream = hub.create_stream(title=None, publishKey=None, publishSecurity="static"
 # stream_id: required, string
 stream = hub.get_stream(stream_id=id)
 # return stream object...
+print "\nget_stream()\n", stream
+# <pili.stream.Stream object at 0x106365490>
 ```
 
 #### List Streams
@@ -112,12 +137,28 @@ stream = hub.get_stream(stream_id=id)
 # marker : optional, string
 # limit  : optional, int
 # title  : optional, string
-res = hub.list_streams(marker=None, limit=50, title="prefix_")
+res = hub.list_streams(marker=None, limit=10, title="prefix_")
 for s in res["items"]:
     # s is stream object...
     # Do someting...
     pass
 next = hub.list_streams(marker=res["marker"])
+print "\nlist_streams()\n", res
+# {
+#   "marker": "10",
+#   "items": [
+#     <pili.stream.Stream object at 0x106365490>,
+#     <pili.stream.Stream object at 0x1063654d0>,
+#     <pili.stream.Stream object at 0x106365510>,
+#     <pili.stream.Stream object at 0x106365550>,
+#     <pili.stream.Stream object at 0x106365590>,
+#     <pili.stream.Stream object at 0x1063655d0>,
+#     <pili.stream.Stream object at 0x106365610>,
+#     <pili.stream.Stream object at 0x106365650>,
+#     <pili.stream.Stream object at 0x106365690>,
+#     <pili.stream.Stream object at 0x1063656d0>
+#   ]
+# }
 ```
 
 ### Stream
@@ -125,7 +166,29 @@ next = hub.list_streams(marker=res["marker"])
 #### To JSON string
 
 ```python
-stream.to_json()
+print stream.to_json()
+# {
+#   "publishSecurity":"static",
+#   "hub":"test-origin",
+#   "title":"55db4ecae3ba573b20000006",
+#   "publishKey":"new_secret_words",
+#   "disabled":false,
+#   "hosts":{
+#     "live":{
+#       "http":"e4kvkh.live1-http.z1.pili.qiniucdn.com",
+#       "rtmp":"e4kvkh.live1-rtmp.z1.pili.qiniucdn.com"
+#     },
+#     "playback":{
+#       "http":"e4kvkh.playback1.z1.pili.qiniucdn.com"
+#     },
+#     "publish":{
+#       "rtmp":"e4kvkh.publish.z1.pili.qiniup.com"
+#     }
+#   },
+#   "updatedAt":"2015-08-24T13:05:15.272975102-04:00",
+#   "id":"z1.test-origin.55db4ecae3ba573b20000006",
+#   "createdAt":"2015-08-24T13:05:14.526-04:00"
+# }
 ```
 
 #### Update a Stream
@@ -171,6 +234,7 @@ print status
 ```python
 url = stream.rtmp_publish_url()
 print url
+# rtmp://e4kvkh.publish.z1.pili.qiniup.com/test-origin/55db52e1e3ba573b2000000e?key=new_secret_words
 ```
 
 #### Generate RTMP live play URLs
@@ -182,6 +246,7 @@ for k in urls:
 
 # Get original RTMP live url
 original_url = urls["ORIGIN"]
+# {"ORIGIN": "rtmp://e4kvkh.live1-rtmp.z1.pili.qiniucdn.com/test-origin/55db52e1e3ba573b2000000e"}
 ```
 
 #### Generate HLS play live URLs
@@ -193,6 +258,7 @@ for k in urls:
 
 # Get original HLS live url
 original_url = urls["ORIGIN"]
+# {"ORIGIN": "http://e4kvkh.live1-http.z1.pili.qiniucdn.com/test-origin/55db52e1e3ba573b2000000e.m3u8"}
 ```
 
 #### Generate Http-Flv live play URLs
@@ -204,25 +270,26 @@ for k in urls:
 
 # Get original Http-Flv live url
 original_url = urls["ORIGIN"]
+# {"ORIGIN": "http://e4kvkh.live1-http.z1.pili.qiniucdn.com/test-origin/55db52e1e3ba573b2000000e.flv"}
 ```
 
 #### Get Stream segments
 
 ```python
-# start : optional, int64, in second, unix timestamp
-# end   : optional, int64, in second, unix timestamp
-# limit : optional, uint32
+# start_second : optional, int64, in second, unix timestamp
+# end_second   : optional, int64, in second, unix timestamp
+# limit        : optional, uint32
 # ...but you must provide both or none of the arguments.
-segments = stream.segments(start_second=start, end_second=end, limit=None)
+segments = stream.segments(start_second=None, end_second=None, limit=None)
 print segments
 # [
 #     {
-#         "start": <StartSecond>,
-#         "end": <EndSecond>
+#         "start": 1440282134,
+#         "end": 1440437833
 #     },
 #     {
-#         "start": <StartSecond>,
-#         "end": <EndSecond>
+#         "start": 1440437981,
+#         "end": 1440438835
 #     },
 #     ...
 # ]
@@ -249,7 +316,7 @@ original_url = urls["ORIGIN"]
 # start     : required, int64, in second, unix timestamp
 # end       : required, int64, in second, unix timestamp
 # notifyUrl : optional, string 
-res = stream.save_as(name="videoName.mp4", format="mp4", start_second=start, end_second=end, notifyUrl=None)
+res = stream.save_as(name="videoName.mp4", format="mp4", start=1440282134, end=1440437833, notifyUrl=None)
 print res
 # {
 #     "url": "http://ey636h.vod1.z1.pili.qiniucdn.com/recordings/z1.test-hub.55d81a72e3ba5723280000ec/videoName.m3u8",
@@ -259,6 +326,7 @@ print res
 ```
 
 #### Snapshot stream
+
 ```python
 # name      : required, string
 # format    : required, string see http://developer.qiniu.com/docs/v6/api/reference/fop/av/avthumb.html
@@ -277,9 +345,30 @@ API: `curl -D GET http://api.qiniu.com/status/get/prefop?id={PersistentId}`
 Doc reference: <http://developer.qiniu.com/docs/v6/api/overview/fop/persistent-fop.html#pfop-status>  
 
 #### Delete a stream
+
 ```python
 stream.delete()
 ```
 
 ## History
 
+- 1.5.0
+    - Update Stream Create,Get,List
+        - hub.create_stream()
+        - hub.get_stream()
+        - hub.list_streams()
+    - Add Stream operations else
+        - stream.to_json()
+        - stream.update()
+        - stream.disable()
+        - stream.enable()
+        - stream.status()
+        - stream.rtmp_publish_url()
+        - stream.rtmp_live_urls()
+        - stream.hls_live_urls()
+        - stream.http_flv_live_urls()
+        - stream.segments()
+        - stream.hls_playback_urls()
+        - stream.snapshot()
+        - stream.save_as()
+        - stream.delete()
