@@ -68,14 +68,15 @@ from pili import *
 
 access_key = 'qiniu_access_key' 
 secret_key = 'qiniu_secret_key'
-hub_name   = 'hub_name'
+
+hub_name   = 'hub_name' # The Hub must be exists before use
 
 # Change API host as necessary
 # 
 # pili.qiniuapi.com as deafult
 # pili-lte.qiniuapi.com is the latest RC version
 # 
-pili.API_HOST = 'pili-lte.qiniuapi.com' # The Hub must be exists before use
+pili.API_HOST = 'pili-lte.qiniuapi.com'
 ```
 
 ### Hub
