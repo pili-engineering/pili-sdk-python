@@ -70,12 +70,12 @@ access_key = 'qiniu_access_key'
 secret_key = 'qiniu_secret_key'
 hub_name   = 'hub_name'
 
-// Change API host as necessary
-// 
-// pili.qiniuapi.com as deafult
-// pili-lte.qiniuapi.com is the latest RC version
-// 
-pili.API_HOST = 'pili-lte.qiniuapi.com'
+# Change API host as necessary
+# 
+# pili.qiniuapi.com as deafult
+# pili-lte.qiniuapi.com is the latest RC version
+# 
+pili.API_HOST = 'pili-lte.qiniuapi.com' # The Hub must be exists before use
 ```
 
 ### Hub
