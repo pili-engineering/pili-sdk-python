@@ -69,7 +69,7 @@ from pili import *
 access_key = 'qiniu_access_key' 
 secret_key = 'qiniu_secret_key'
 
-hub_name   = 'hub_name' # The Hub must be exists before use
+hub_name   = 'pili_hub_name' # The Hub must be exists before use
 
 # Change API host as necessary
 # 
