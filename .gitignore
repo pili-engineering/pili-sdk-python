@@ -54,3 +54,5 @@ docs/_build/
 target/
 
 .DS_Store
+
+test.py

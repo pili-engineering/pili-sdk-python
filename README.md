@@ -14,8 +14,8 @@
 
 - [Installation](#installation)
 - [Usage](#usage)
-    - [Client](#client)
-        - [Create a Pili client](#create-a-pili-client)
+    - [Client](#hub)
+        - [Create a Pili hub](#create-a-pili-hub)
         - [Create a stream](#create-a-stream)
         - [Get a stream](#get-a-stream)
         - [List streams](#list-streams)
@@ -24,6 +24,8 @@
         - [Delete a stream](#delete-a-stream)
         - [Get stream segments](#get-stream-segments)
         - [Get stream status](#get-stream-status)
+        - [Save Stream as a file](#save-stream-as-file)
+        - [Snapshot Stream](#snapshot-stream)
         - [Generate RTMP publish URL](#generate-rtmp-publish-url)
         - [Generate RTMP live play URL](#generate-rtmp-live-play-url)
         - [Generate HLS live play URL](#generate-hls-live-play-url)
@@ -41,7 +43,7 @@ pip install pili
 
 ### Client
 
-#### Create a Pili client
+#### Create a Pili hub
 
 ```python
 from pili import *
@@ -50,7 +52,8 @@ access_key = 'qiniu_access_key'
 secret_key = 'qiniu_secret_key'
 hub_name   = 'hub_name'
 
-client = Client(access_key, secret_key, hub_name)
+credentials = Credentials(access_key, secret_key)
+hub = Hub(credentials, hub_name)
 ```
 
 #### Create a stream
@@ -59,7 +62,7 @@ client = Client(access_key, secret_key, hub_name)
 # title          : optional
 # publishKey     : optional
 # publishSecrity : optional
-stream = client.create_stream(title="test", publishKey="abc", publishSecurity="static")
+stream = hub.create_stream(title="test", publishKey="abc", publishSecurity="static")
 # return stream object...
 ```
 
@@ -67,7 +70,7 @@ stream = client.create_stream(title="test", publishKey="abc", publishSecurity="s
 
 ```python
 # stream_id: required
-stream = client.get_stream(stream_id=id)
+stream = hub.get_stream(stream_id=id)
 # return stream object...
 ```
 
@@ -75,12 +78,12 @@ stream = client.get_stream(stream_id=id)
 ```python
 # marker : optional
 # limit  : optional
-res = client.list_streams()
+res = hub.list_streams()
 for s in res["items"]:
     # s is stream object...
     # Do someting...
     pass
-next = client.list_streams(marker=res["marker"])
+next = hub.list_streams(marker=res["marker"])
 ```
 
 ### Stream
@@ -105,6 +108,36 @@ print status
 # {
 #     "addr": "106.187.43.211:51393",
 #     "status": "disconnected"
+# }
+```
+
+#### Save stream as file
+```python
+# name      : required
+# start     : required
+# end       : required
+# format    : required  http://developer.qiniu.com/docs/v6/api/reference/fop/av/avthumb.html
+# notifyUrl : optional 
+res = stream.save_as(name=name, start_second=start, end_second=end, format=format)
+print res
+# {
+#     "url": "http://ey636h.vod1.z1.pili.qiniucdn.com/recordings/z1.test-hub.55d81a72e3ba5723280000ec/videoName.m3u8",
+#     "targetUrl": "http://ey636h.vod1.z1.pili.qiniucdn.com/recordings/z1.test-hub.55d81a72e3ba5723280000ec/videoName.mp4",
+#     "persistentId": "z1.55d81c6c7823de5a49ad77b3"
+# }
+```
+
+#### Snapshot stream
+```python
+# name      : required
+# format    : required  http://developer.qiniu.com/docs/v6/api/reference/fop/av/avthumb.html
+# time      : optional
+# notifyUrl : optional 
+res = stream.snapshot(name=name, format=format)
+print res
+# {
+#     "targetUrl": "http://ey636h.static1.z1.pili.qiniucdn.com/snapshots/z1.test-hub.55d81a72e3ba5723280000ec/imageName.jpg",
+#     "persistentId": "z1.55d81c247823de5a49ad729c"
 # }
 ```
 

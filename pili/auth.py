@@ -6,6 +6,12 @@ import pili.conf as conf
 from urlparse import urlparse
 from .utils import send_and_decode, __hmac_sha1__
 
+class Credentials(object):
+    def __init__(self, access_key, secret_key):
+        if not (access_key and secret_key):
+            raise ValueError('invalid key')
+        self.__auth__ = Auth(access_key, secret_key)
+
 class Auth(object):
     """
     class Auth store the access_key and secret_key for authentication.

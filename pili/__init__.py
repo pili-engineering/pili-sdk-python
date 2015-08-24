@@ -1,3 +1,4 @@
 from .errors import APIError
-from .client import Client
+from .auth import Credentials
+from .hub import Hub
 import conf
