@@ -213,7 +213,7 @@ original_url = urls["ORIGIN"]
 # end   : optional, int64, in second, unix timestamp
 # limit : optional, uint32
 # ...but you must provide both or none of the arguments.
-segments = stream.segments(start_second=start, end_second=end, limit=limit)
+segments = stream.segments(start_second=start, end_second=end, limit=None)
 print segments
 # [
 #     {
