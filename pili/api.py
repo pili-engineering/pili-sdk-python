@@ -23,7 +23,7 @@ def get_stream(stream_id):
 
 @auth_interface
 def get_stream_list(**args):
-    keyword = ['hub', 'marker', 'limit']
+    keyword = ['hub', 'marker', 'limit', 'title']
     if set(args) - set(keyword):
         raise ValueError('invalid key')
     url = "http://%s/%s/streams?" % (conf.API_HOST, conf.API_VERSION)

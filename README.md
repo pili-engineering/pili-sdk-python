@@ -76,7 +76,7 @@ hub_name   = 'pili_hub_name' # The Hub must be exists before use
 # pili.qiniuapi.com as deafult
 # pili-lte.qiniuapi.com is the latest RC version
 # 
-pili.API_HOST = 'pili-lte.qiniuapi.com'
+conf.API_HOST = 'pili-lte.qiniuapi.com'
 ```
 
 ### Hub
