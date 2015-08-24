@@ -30,23 +30,37 @@ class Stream(object):
 
     def refresh(self):
         self.__data__ = api.get_stream(self.__auth__, stream_id=self.__stream_id__)
-        return self.__data__
+        return self
 
     def update(self, **args):
         res = api.update_stream(self.__auth__, stream_id=self.__stream_id__, **args)
         self.__data__ = res
-        return res
+        return self
 
-    def delete(self):
-        res = api.delete_stream(self.__auth__, stream_id=self.__stream_id__)
-        return res
+    def disable(self):
+        return self.update(disabled=True)
+
+    def enable(self):
+        return self.update(disabled=False)
 
     def status(self):
         res = api.get_status(self.__auth__, stream_id=self.__stream_id__)
         return res
 
-    def segments(self, start_second=None, end_second=None):
-        res = api.get_segments(self.__auth__, stream_id=self.__stream_id__, start_second=start_second, end_second=end_second)
+    def segments(self, start_second=None, end_second=None, limit=None):
+        res = api.get_segments(self.__auth__, stream_id=self.__stream_id__, start_second=start_second, end_second=end_second, limit=limit)
+        return res
+
+    def save_as(self, **args):
+        res = api.save_stream_as(self.__auth__, stream_id=self.__stream_id__, **args)
+        return res
+
+    def snapshot_stream(self, **args):
+        res = api.save_stream_as(self.__auth__, stream_id=self.__stream_id__, **args)
+        return res
+
+    def delete(self):
+        res = api.delete_stream(self.__auth__, stream_id=self.__stream_id__)
         return res
 
     def __base__(self, protocol, host, profile):
@@ -90,7 +104,7 @@ class Stream(object):
         if self.publishSecurity == "static":
             url += "?key=%s" % self.publishKey
         elif self.publishSecurity == "dynamic":
-            nonce = str(int(time.time()*1000))
+            nonce = str(int(time.time()))
             url += "?nonce=%s" % nonce
             parsed = urlparse(url)
             data = "%s?%s" % (parsed.path, parsed.query)

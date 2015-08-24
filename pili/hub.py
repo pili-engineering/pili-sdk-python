@@ -1,10 +1,9 @@
 import pili.api as api
-from .auth import Auth
 from .stream import Stream
 
-class Client(object):
-    def __init__(self, access_key, secret_key, hub_name):
-        self.__auth__ = Auth(access_key, secret_key)
+class Hub(object):
+    def __init__(self, credentials, hub_name):
+        self.__auth__ = credentials.__auth__
         self.__hub__ = hub_name
 
     def create_stream(self, **args):
