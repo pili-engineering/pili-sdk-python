@@ -21,6 +21,8 @@
         - [List streams](#list-streams)
     - [Stream](#stream)
         - [Update a stream](#update-a-stream)
+        - [Disable a stream](#disable-a-stream)
+        - [Enable a stream](#enable-a-stream)
         - [Delete a stream](#delete-a-stream)
         - [Get stream segments](#get-stream-segments)
         - [Get stream status](#get-stream-status)
