@@ -14,7 +14,7 @@
 
 - [Installation](#installation)
 - [Usage](#usage)
-    - [Client](#hub)
+    - [Hub](#hub)
         - [Create a Pili hub](#create-a-pili-hub)
         - [Create a stream](#create-a-stream)
         - [Get a stream](#get-a-stream)
@@ -43,7 +43,7 @@ pip install pili
 
 ## Usage:
 
-### Client
+### Hub
 
 #### Create a Pili hub
 
