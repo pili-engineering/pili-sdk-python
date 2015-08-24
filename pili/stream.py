@@ -104,7 +104,7 @@ class Stream(object):
         if self.publishSecurity == "static":
             url += "?key=%s" % self.publishKey
         elif self.publishSecurity == "dynamic":
-            nonce = str(int(time.time()*1000))
+            nonce = str(int(time.time()))
             url += "?nonce=%s" % nonce
             parsed = urlparse(url)
             data = "%s?%s" % (parsed.path, parsed.query)
