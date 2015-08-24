@@ -111,7 +111,8 @@ stream = hub.get_stream(stream_id=id)
 ```python
 # marker : optional, string
 # limit  : optional, int
-res = hub.list_streams()
+# title  : optional, string
+res = hub.list_streams(marker=None, limit=50, title="prefix_")
 for s in res["items"]:
     # s is stream object...
     # Do someting...
@@ -130,10 +131,10 @@ stream.to_json()
 #### Update a Stream
 
 ```python
-# publishKey     : optional
-# publishSecrity : optional
-# disabled       : optional
-stream.update(publishKey = key, publishSecurity="dynamic")
+# publishKey     : optional, string
+# publishSecrity : optional, string
+# disabled       : optional, bool
+stream.update(publishKey = "new_secret_words", publishSecurity="dynamic")
 ```
 
 #### Disable a Stream
@@ -154,8 +155,14 @@ stream.enable()
 status = stream.status()
 print status
 # {
-#     "addr": "106.187.43.211:51393",
-#     "status": "disconnected"
+#     "addr": "222.73.202.226:2572",
+#     "status": "connected",
+#     "bytesPerSecond": 16870.200000000001,
+#     "framesPerSecond": { 
+#         "audio": 42.200000000000003,
+#         "video": 14.733333333333333,
+#         "data": 0.066666666666666666,
+#     }
 # }
 ```
 
