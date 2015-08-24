@@ -4,12 +4,12 @@ setup(
     name = 'pili',
     version = '1.5.0',
     keywords = ('pili'),
-    description = 'SDK for pili',
+    description = 'Pili Streaming Cloud server-side library for Python',
     license = 'MIT License',
     install_requires = [],
 
-    author = 'fanchenlin',
-    author_email = 'fanchenlin@qiniu.com',
+    author = 'Pili Engineering',
+    author_email = 'pili@qiniu.com',
 
     packages = find_packages(),
     platforms = 'any',
