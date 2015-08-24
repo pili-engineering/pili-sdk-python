@@ -249,7 +249,7 @@ original_url = urls["ORIGIN"]
 # start     : required, int64, in second, unix timestamp
 # end       : required, int64, in second, unix timestamp
 # notifyUrl : optional, string 
-res = stream.save_as(name=name, format=format, start_second=start, end_second=end, notifyUrl=None)
+res = stream.save_as(name="videoName.mp4", format="mp4", start_second=start, end_second=end, notifyUrl=None)
 print res
 # {
 #     "url": "http://ey636h.vod1.z1.pili.qiniucdn.com/recordings/z1.test-hub.55d81a72e3ba5723280000ec/videoName.m3u8",
@@ -264,7 +264,7 @@ print res
 # format    : required, string see http://developer.qiniu.com/docs/v6/api/reference/fop/av/avthumb.html
 # time      : optional, int64, in second, unix timestamp
 # notifyUrl : optional, string 
-res = stream.snapshot(name=name, format=format, time=None, notifyUrl=None)
+res = stream.snapshot(name="imageName.jpg", format="jpg", time=None, notifyUrl=None)
 print res
 # {
 #     "targetUrl": "http://ey636h.static1.z1.pili.qiniucdn.com/snapshots/z1.test-hub.55d81a72e3ba5723280000ec/imageName.jpg",
