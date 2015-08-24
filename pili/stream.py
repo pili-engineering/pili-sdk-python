@@ -5,7 +5,6 @@ from urlparse import urlparse
 import json
 import time
 
-
 class Stream(object):
     """
     Stream is used to control a stream. You should always create a Stream object by the
