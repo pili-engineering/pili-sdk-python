@@ -1,7 +1,3 @@
-"""
-All api for access pili.
-More Info: http://pili-io.github.io/docs/v1/index.html
-"""
 from .auth import auth_interface
 import pili.conf as conf
 from urllib2 import Request
@@ -80,4 +76,3 @@ def snapshot_stream(stream_id, **args):
     encoded = json.dumps(args)
     url = "http://%s/%s/streams/%s/snapshot" % (conf.API_HOST, conf.API_VERSION, stream_id)
     return Request(url=url, data=encoded)
-
