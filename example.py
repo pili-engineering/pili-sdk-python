@@ -9,7 +9,7 @@ hub_name   = "Pili_Hub_Name" # The Hub must be exists before use
 # pili.qiniuapi.com as deafult
 # pili-lte.qiniuapi.com is the latest RC version
 # 
-conf.API_HOST = 'pili.qiniuapi.com' #default
+# conf.API_HOST = 'pili.qiniuapi.com' #default
 
 credentials = Credentials(access_key, secret_key)
 hub = Hub(credentials, hub_name)
