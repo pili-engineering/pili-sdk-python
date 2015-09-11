@@ -26,16 +26,17 @@ print "\ncreate_stream()\n", stream.to_json()
 #   "title": "55db4a9ee3ba573b20000004",
 #   "publishKey": "976655fbf3bee71e",
 #   "disabled": false,
-#   "hosts": {
-#     "live": {
-#       "http": "e4kvkh.live1-http.z1.pili.qiniucdn.com",
-#       "rtmp": "e4kvkh.live1-rtmp.z1.pili.qiniucdn.com"
+#   "hosts":{
+#     "live":{
+#       "hdl":"eksg7h.live1-hdl.z1.pili.qiniucdn.com",
+#       "hls":"e4kvkh.live1-hls.z1.pili.qiniucdn.com",
+#       "rtmp":"e4kvkh.live1-rtmp.z1.pili.qiniucdn.com"
 #     },
-#     "playback": {
-#       "http": "e4kvkh.playback1.z1.pili.qiniucdn.com"
+#     "playback":{
+#       "hls":"e4kvkh.playback1.z1.pili.qiniucdn.com"
 #     },
-#     "publish": {
-#       "rtmp": "e4kvkh.publish.z1.pili.qiniup.com"
+#     "publish":{
+#       "rtmp":"e4kvkh.publish.z1.pili.qiniup.com"
 #     }
 #   },
 #   "updatedAt": "2015-08-24T16:47:26.786Z",
@@ -53,16 +54,17 @@ print "\nget_stream()\n", stream.to_json()
 #   "title": "55db4a9ee3ba573b20000004",
 #   "publishKey": "976655fbf3bee71e",
 #   "disabled": false,
-#   "hosts": {
-#     "live": {
-#       "http": "e4kvkh.live1-http.z1.pili.qiniucdn.com",
-#       "rtmp": "e4kvkh.live1-rtmp.z1.pili.qiniucdn.com"
+#   "hosts":{
+#     "live":{
+#       "hdl":"eksg7h.live1-hdl.z1.pili.qiniucdn.com",
+#       "hls":"e4kvkh.live1-hls.z1.pili.qiniucdn.com",
+#       "rtmp":"e4kvkh.live1-rtmp.z1.pili.qiniucdn.com"
 #     },
-#     "playback": {
-#       "http": "e4kvkh.playback1.z1.pili.qiniucdn.com"
+#     "playback":{
+#       "hls":"e4kvkh.playback1.z1.pili.qiniucdn.com"
 #     },
-#     "publish": {
-#       "rtmp": "e4kvkh.publish.z1.pili.qiniup.com"
+#     "publish":{
+#       "rtmp":"e4kvkh.publish.z1.pili.qiniup.com"
 #     }
 #   },
 #   "updatedAt": "2015-08-24T16:47:26.786Z",
@@ -105,11 +107,12 @@ print "\nStream update()\n", stream.to_json()
 #   "disabled":false,
 #   "hosts":{
 #     "live":{
-#       "http":"e4kvkh.live1-http.z1.pili.qiniucdn.com",
+#       "hdl":"eksg7h.live1-hdl.z1.pili.qiniucdn.com",
+#       "hls":"e4kvkh.live1-hls.z1.pili.qiniucdn.com",
 #       "rtmp":"e4kvkh.live1-rtmp.z1.pili.qiniucdn.com"
 #     },
 #     "playback":{
-#       "http":"e4kvkh.playback1.z1.pili.qiniucdn.com"
+#       "hls":"e4kvkh.playback1.z1.pili.qiniucdn.com"
 #     },
 #     "publish":{
 #       "rtmp":"e4kvkh.publish.z1.pili.qiniup.com"
@@ -151,11 +154,11 @@ print "\nStream rtmp_live_urls()\n", stream.rtmp_live_urls()
 
 # Generate HLS play URLs
 print "\nStream hls_live_urls()\n", stream.hls_live_urls()
-# {"ORIGIN": "http://e4kvkh.live1-http.z1.pili.qiniucdn.com/test-origin/55db52e1e3ba573b2000000e.m3u8"}
+# {"ORIGIN": "http://e4kvkh.live1-hls.z1.pili.qiniucdn.com/test-origin/55db52e1e3ba573b2000000e.m3u8"}
 
 # Generate Http-Flv live play URLs
 print "\nStream http_flv_live_urls()\n", stream.http_flv_live_urls()
-# {"ORIGIN": "http://e4kvkh.live1-http.z1.pili.qiniucdn.com/test-origin/55db52e1e3ba573b2000000e.flv"}
+# {"ORIGIN": "http://e4kvkh.live1-hdl.z1.pili.qiniucdn.com/test-origin/55db52e1e3ba573b2000000e.flv"}
 
 # Get Stream segments
 # start_second : optional, int64, in second, unix timestamp

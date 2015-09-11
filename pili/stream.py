@@ -78,28 +78,28 @@ class Stream(object):
 
     def http_flv_live_urls(self):
         res = dict()
-        res["ORIGIN"] = self.__base__("http", self.hosts["live"]["http"], "") + ".flv"
+        res["ORIGIN"] = self.__base__("http", self.hosts["live"]["hdl"], "") + ".flv"
         if self.profiles!=None:
             for profile in self.profiles:
-                res[profile] = self.__base__("http", self.hosts["live"]["http"], profile) + ".flv"
+                res[profile] = self.__base__("http", self.hosts["live"]["hdl"], profile) + ".flv"
         return res
 
     def hls_live_urls(self):
         res = dict()
-        res["ORIGIN"] = self.__base__("http", self.hosts["live"]["http"], "") + ".m3u8"
+        res["ORIGIN"] = self.__base__("http", self.hosts["live"]["hls"], "") + ".m3u8"
         if self.profiles!=None:
             for profile in self.profiles:
-                res[profile] = self.__base__("http", self.hosts["live"]["http"], profile) + ".m3u8"
+                res[profile] = self.__base__("http", self.hosts["live"]["hls"], profile) + ".m3u8"
         return res
 
     def hls_playback_urls(self, start_second, end_second):
         res = dict()
-        url = self.__base__("http", self.hosts["playback"]["http"], "") + ".m3u8"
+        url = self.__base__("http", self.hosts["playback"]["hls"], "") + ".m3u8"
         url += "?start=%d&end=%d" % (start_second, end_second)
         res["ORIGIN"] = url
         if self.profiles!=None:
             for profile in self.profiles:
-                url = self.__base__("http", self.hosts["playback"]["http"], profile) + ".m3u8"
+                url = self.__base__("http", self.hosts["playback"]["hls"], profile) + ".m3u8"
                 url += "?start=%d&end=%d" % (start_second, end_second)
                 res[profile] = url
         return res
