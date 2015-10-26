@@ -1,7 +1,6 @@
 import pili.api as api
 import pili.conf as conf
 from .utils import __hmac_sha1__
-from urlparse import urlparse
 import json
 import time
 
@@ -111,8 +110,7 @@ class Stream(object):
         elif self.publishSecurity == "dynamic":
             nonce = str(int(time.time()))
             url += "?nonce=%s" % nonce
-            parsed = urlparse(url)
-            data = "%s?%s" % (parsed.path, parsed.query)
+            data = "/%s/%s?nonce=%s" % (self.hub, self.title, nonce)
             token = __hmac_sha1__(data, str(self.publishKey))
             url += "&token=%s" % token
         else:
