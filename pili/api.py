@@ -3,12 +3,19 @@ import pili.conf as conf
 from urllib2 import Request
 import json
 
+def normalize(args, keyword):
+    if set(args) - set(keyword):
+        raise ValueError('invalid key')
+    for k, v in args.items():
+        if v is None:
+            del args[k]
+    return args
+
+
 @auth_interface
 def create_stream(**args):
     keyword = ['hub', 'title', 'publishKey', 'publishSecurity']
-    if set(args) - set(keyword):
-        raise ValueError('invalid key')
-    encoded = json.dumps(args)
+    encoded = json.dumps(normalize(args, keyword))
     url = "http://%s/%s/streams" % (conf.API_HOST, conf.API_VERSION)
     return Request(url=url, data=encoded)
 
@@ -20,21 +27,17 @@ def get_stream(stream_id):
 @auth_interface
 def get_stream_list(**args):
     keyword = ['hub', 'marker', 'limit', 'title']
-    if set(args) - set(keyword):
-        raise ValueError('invalid key')
+    args = normalize(args, keyword)
     url = "http://%s/%s/streams?" % (conf.API_HOST, conf.API_VERSION)
-    for k in args:
-        if args[k] is not None:
-            url += "&%s=%s" % (k, args[k])
+    for k, v in args.items():
+        url += "&%s=%s" % (k, v)
     req = Request(url=url)
     return req
 
 @auth_interface
 def update_stream(stream_id, **args):
     keyword = ['publishKey', 'publishSecurity', 'disabled']
-    if set(args) - set(keyword):
-        raise ValueError('invalid key')
-    encoded = json.dumps(args)
+    encoded = json.dumps(normalize(args, keyword))
     url = "http://%s/%s/streams/%s" % (conf.API_HOST, conf.API_VERSION, stream_id)
     return Request(url=url, data=encoded)
 
@@ -62,17 +65,13 @@ def get_segments(stream_id, start_second=None, end_second=None, limit=None):
 @auth_interface
 def save_stream_as(stream_id, **args):
     keyword = ['name', 'notifyUrl', 'start', 'end', 'format']
-    if set(args) - set(keyword):
-        raise ValueError('invalid key')
-    encoded = json.dumps(args)
+    encoded = json.dumps(normalize(args, keyword))
     url = "http://%s/%s/streams/%s/saveas" % (conf.API_HOST, conf.API_VERSION, stream_id)
     return Request(url=url, data=encoded)
 
 @auth_interface
 def snapshot_stream(stream_id, **args):
     keyword = ['name', 'format', 'time', 'notifyUrl']
-    if set(args) - set(keyword):
-        raise ValueError('invalid key')
-    encoded = json.dumps(args)
+    encoded = json.dumps(normalize(args, keyword))
     url = "http://%s/%s/streams/%s/snapshot" % (conf.API_HOST, conf.API_VERSION, stream_id)
     return Request(url=url, data=encoded)
