@@ -54,7 +54,7 @@ class Stream(object):
         return res
 
     def snapshot_stream(self, **args):
-        res = api.save_stream_as(self.__auth__, stream_id=self.__stream_id__, **args)
+        res = api.snapshot_stream(self.__auth__, stream_id=self.__stream_id__, **args)
         return res
 
     def delete(self):
