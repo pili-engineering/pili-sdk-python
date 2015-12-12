@@ -137,6 +137,8 @@ print "\nget_stream()\n", stream
 # marker : optional, string
 # limit  : optional, int
 # title  : optional, string
+# status : optional, string, the only acceptable value is "connected"
+# idonly : optional, bool
 res = hub.list_streams(marker=None, limit=10, title="prefix_")
 for s in res["items"]:
     # s is stream object...

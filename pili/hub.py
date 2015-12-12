@@ -13,10 +13,10 @@ class Hub(object):
     def get_stream(self, stream_id):
         return Stream(self.__auth__, stream_id=stream_id)
 
-    def list_streams(self, marker=None, limit=None):
-        res = api.get_stream_list(self.__auth__, hub=self.__hub__, marker=marker, limit=limit)
+    def list_streams(self, **args):
+        res = api.get_stream_list(self.__auth__, hub=self.__hub__, **args)
         items = []
-        for data in res["items"]:
+        for data in res["items"] if res["items"] is not None else []:
             items.append(Stream(self.__auth__, stream_id=data["id"]))
         res["items"] = items
         return res
