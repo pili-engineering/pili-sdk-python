@@ -26,8 +26,10 @@ def get_stream(stream_id):
 
 @auth_interface
 def get_stream_list(**args):
-    keyword = ['hub', 'marker', 'limit', 'title']
+    keyword = ['hub', 'marker', 'limit', 'title', 'status', 'idonly']
     args = normalize(args, keyword)
+    if args['idonly'] is not True:
+        del args['idonly']
     url = "http://%s/%s/streams?" % (conf.API_HOST, conf.API_VERSION)
     for k, v in args.items():
         url += "&%s=%s" % (k, v)
