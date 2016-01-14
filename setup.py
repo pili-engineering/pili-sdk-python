@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'pili',
-    version = '1.5.5',
+    version = '1.5.6',
     keywords = ('pili'),
     description = 'Pili Streaming Cloud server-side library for Python',
     license = 'MIT License',

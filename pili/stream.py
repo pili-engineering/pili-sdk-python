@@ -15,7 +15,7 @@ class Stream(object):
             raise ValueError('invalid key')
         if not stream_id:
             stream_id = data["id"]
-        self.__stream_id__ = stream_id
+        self.id = stream_id
         self.__data__ = data
 
     def __getattr__(self, attr):
@@ -27,11 +27,11 @@ class Stream(object):
             return None
 
     def refresh(self):
-        self.__data__ = api.get_stream(self.__auth__, stream_id=self.__stream_id__)
+        self.__data__ = api.get_stream(self.__auth__, stream_id=self.id)
         return self
 
     def update(self, **args):
-        res = api.update_stream(self.__auth__, stream_id=self.__stream_id__, **args)
+        res = api.update_stream(self.__auth__, stream_id=self.id, **args)
         self.__data__ = res
         return self
 
@@ -42,23 +42,23 @@ class Stream(object):
         return self.update(disabled=False)
 
     def status(self):
-        res = api.get_status(self.__auth__, stream_id=self.__stream_id__)
+        res = api.get_status(self.__auth__, stream_id=self.id)
         return res
 
     def segments(self, start_second=None, end_second=None, limit=None):
-        res = api.get_segments(self.__auth__, stream_id=self.__stream_id__, start_second=start_second, end_second=end_second, limit=limit)
+        res = api.get_segments(self.__auth__, stream_id=self.id, start_second=start_second, end_second=end_second, limit=limit)
         return res
 
     def save_as(self, **args):
-        res = api.save_stream_as(self.__auth__, stream_id=self.__stream_id__, **args)
+        res = api.save_stream_as(self.__auth__, stream_id=self.id, **args)
         return res
 
     def snapshot(self, **args):
-        res = api.snapshot_stream(self.__auth__, stream_id=self.__stream_id__, **args)
+        res = api.snapshot_stream(self.__auth__, stream_id=self.id, **args)
         return res
 
     def delete(self):
-        res = api.delete_stream(self.__auth__, stream_id=self.__stream_id__)
+        res = api.delete_stream(self.__auth__, stream_id=self.id)
         return res
 
     def __base__(self, protocol, host, profile):
