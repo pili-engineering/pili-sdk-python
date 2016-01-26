@@ -92,15 +92,10 @@ class Stream(object):
         return res
 
     def hls_playback_urls(self, start_second, end_second):
+        name = str(int(time.time()))
+        resp = self.save_as(stream_id=self.id, name=name, start=start_second, end=end_second)
         res = dict()
-        url = self.__base__("http", self.hosts["playback"]["hls"], "") + ".m3u8"
-        url += "?start=%d&end=%d" % (start_second, end_second)
-        res["ORIGIN"] = url
-        if self.profiles!=None:
-            for profile in self.profiles:
-                url = self.__base__("http", self.hosts["playback"]["hls"], profile) + ".m3u8"
-                url += "?start=%d&end=%d" % (start_second, end_second)
-                res[profile] = url
+        res["ORIGIN"] = resp.url
         return res
 
     def rtmp_publish_url(self):
