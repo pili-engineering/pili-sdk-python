@@ -93,9 +93,9 @@ class Stream(object):
 
     def hls_playback_urls(self, start_second, end_second):
         name = str(int(time.time()))
-        resp = self.save_as(stream_id=self.id, name=name, start=start_second, end=end_second)
+        resp = self.save_as(name=name, start=start_second, end=end_second)
         res = dict()
-        res["ORIGIN"] = resp.url
+        res["ORIGIN"] = resp["url"]
         return res
 
     def rtmp_publish_url(self):
