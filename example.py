@@ -5,10 +5,10 @@ secret_key = "Qiniu_SecretKey"
 hub_name   = "Pili_Hub_Name" # The Hub must be exists before use
 
 # Change API host as necessary
-# 
+#
 # pili.qiniuapi.com as default
 # pili-lte.qiniuapi.com is the latest RC version
-# 
+#
 # conf.API_HOST = 'pili.qiniuapi.com' #default
 
 credentials = Credentials(access_key, secret_key)
@@ -137,7 +137,7 @@ print "\nStream status()\n", stream.status()
 #     "addr": "222.73.202.226:2572",
 #     "status": "connected",
 #     "bytesPerSecond": 16870.200000000001,
-#     "framesPerSecond": { 
+#     "framesPerSecond": {
 #         "audio": 42.200000000000003,
 #         "video": 14.733333333333333,
 #         "data": 0.066666666666666666,
@@ -185,10 +185,10 @@ print "\nStream hls_playback_urls(1440282134, 1440437833)\n", stream.hls_playbac
 
 # Save Stream as a file
 # name      : required, string
-# format    : required, string, see http://developer.qiniu.com/docs/v6/api/reference/fop/av/avthumb.html
 # start     : required, int64, in second, unix timestamp
 # end       : required, int64, in second, unix timestamp
-# notifyUrl : optional, string 
+# format    : optional, string, see http://developer.qiniu.com/docs/v6/api/reference/fop/av/avthumb.html
+# notifyUrl : optional, string
 res = stream.save_as(name="videoName.mp4", format="mp4", start=1440282134, end=1440437833, notifyUrl=None)
 print res
 # {
@@ -201,7 +201,7 @@ print res
 # name      : required, string
 # format    : required, string see http://developer.qiniu.com/docs/v6/api/reference/fop/av/avthumb.html
 # time      : optional, int64, in second, unix timestamp
-# notifyUrl : optional, string 
+# notifyUrl : optional, string
 res = stream.snapshot(name="imageName.jpg", format="jpg", time=None, notifyUrl=None)
 print res
 # {
