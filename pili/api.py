@@ -67,7 +67,7 @@ def get_segments(stream_id, start_second=None, end_second=None, limit=None):
 
 @auth_interface
 def save_stream_as(stream_id, **args):
-    keyword = ['name', 'notifyUrl', 'start', 'end', 'format']
+    keyword = ['name', 'notifyUrl', 'start', 'end', 'format', 'pipeline']
     encoded = json.dumps(normalize(args, keyword))
     url = "http://%s/%s/streams/%s/saveas" % (conf.API_HOST, conf.API_VERSION, stream_id)
     return Request(url=url, data=encoded)

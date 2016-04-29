@@ -314,10 +314,11 @@ original_url = urls["ORIGIN"]
 
 ```python
 # name      : required, string
-# format    : required, string, see http://developer.qiniu.com/docs/v6/api/reference/fop/av/avthumb.html
 # start     : required, int64, in second, unix timestamp
 # end       : required, int64, in second, unix timestamp
+# format    : optional, string, see http://developer.qiniu.com/docs/v6/api/reference/fop/av/avthumb.html
 # notifyUrl : optional, string
+# pipeline  : optional, string
 res = stream.save_as(name="videoName.mp4", format="mp4", start=1440282134, end=1440437833, notifyUrl=None)
 print res
 # {
@@ -354,6 +355,8 @@ stream.delete()
 
 ## History
 
+- 1.5.8
+    - Add pipeline in saveAs
 - 1.5.7
     - Use save_as in hls_playback_urls
 - 1.5.0
