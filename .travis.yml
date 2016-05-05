@@ -7,17 +7,17 @@ install:
 - pip install pytest
 - pip install pytest-cov
 - pip install requests
-- pip install scrutinizer-ocular
-before_script:
-- export PYTHONPATH="$PYTHONPATH:."
-script:
-# - flake8 --show-source --show-pep8 --max-line-length=160 .
-# - py.test --cov qiniu
-# - ocular --data-file .coverage
+# - pip install scrutinizer-ocular
+# before_script:
+# - export PYTHONPATH="$PYTHONPATH:."
+script: nosetests
+- py.test --cov pili
+#- flake8 --show-source --show-pep8 --max-line-length=160 .
+#- ocular --data-file .coverage
 deploy:
   provider: pypi
   user: qiniusdk
   password:
-    secure: N2u9xzhncbziIhoDdpaCcr7D3lW/N7AOIZDpx+M5QW0lPqIXkZDioOTZ7b4QNwx/XFMu6tdeK79A2Wg7T9/8VfEWDd2bYL7a1J7spoFJi9k3HVHHiFBmg7vXr1OGn3D51xqsrq3Kh9uRP150a5CA2qxYabKb6b6dn5QhOTPhfFY=
+    secure: MLmZbIXL4kFq0mOi9BprrHTaSNd0ATGTZ3Nw/OjoWlhNw0IaCcaVZgGcGUCE2698zME3YqTzKJ28jZOUKDneNyeBNlai9eS89abbU9onZRczb5xyiMdiqsMks1to+549xjmf/r95SaV/grK350Sy9H5RIMof5iNwCDMugyxnEeg=
   on:
     tags: true
