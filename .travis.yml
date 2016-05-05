@@ -10,6 +10,10 @@ install:
 - pip install scrutinizer-ocular
 before_script:
 - export PYTHONPATH="$PYTHONPATH:."
+script:
+#- flake8 --show-source --show-pep8 --max-line-length=160 .
+- py.test --cov pili
+#- ocular --data-file .coverage
 deploy:
   provider: pypi
   user: qiniusdk
