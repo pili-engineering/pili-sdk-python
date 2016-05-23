@@ -1,25 +1,24 @@
-# Pili Streaming Cloud server-side library for Golang
+# Pili Streaming Cloud server-side library for Python
 
 ## Features
 
 - URL
-    - [x] RTMP推流地址: RTMPPublishURL(domain, hub, streamKey, mac, expireAfterDays)
-    - [x] RTMP直播地址: RTMPPlayURL(domain, hub, streamKey)
-    - [x] HLS直播地址: HLSPlayURL(domain, hub, streamKey)
-    - [x] HDL直播地址: HDLPlayURL(domain, hub, streamKey)
-    - [x] 截图直播地址: SnapshotPlayURL(domain, hub, streamKey)
+    - [x] RTMP推流地址: rtmp_publish_url(domain, hub, key, mac, expire_after_seconds)
+    - [x] RTMP直播地址: rtmp_play_url(domain, hub, key)
+    - [x] HLS直播地址: hls_play_url(domain, hub, key)
+    - [x] HDL直播地址: hdl_play_url(domain, hub, key)
+    - [x] 截图直播地址: snapshot_play_url(domain, hub, key)
 - Hub
-    - [x] 创建流: hub.Create(streamKey)
-    - [x] 获得流: hub.Stream(streamKey)
-    - [x] 列出流: hub.List(prefix, limit, marker)
-    - [x] 列出正在直播的流: hub.ListLive(prefix, limit, marker)
+    - [x] 创建流: hub.create(key)
+    - [x] 获得流: hub.get(key)
+    - [x] 列出流: hub.list(prefix, limit, marker, liveonly)
 - Stream
     - [x] 流信息: stream.Info()
-    - [x] 禁用流: stream.Disable()
-    - [x] 启用流: stream.Enable()
-    - [x] 查询直播状态: stream.LiveStatus()
-    - [x] 保存直播回放: stream.Save(start, end)
-    - [x] 查询直播历史: stream.HistoryActivity(start, end)
+    - [x] 禁用流: stream.disable()
+    - [x] 启用流: stream.dnable()
+    - [x] 查询直播状态: stream.status()
+    - [x] 保存直播回放: stream.save(start, end)
+    - [x] 查询直播历史: stream.history(start, end)
 
 ## Contents
 
