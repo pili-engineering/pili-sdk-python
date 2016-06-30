@@ -2,11 +2,10 @@
 Auth provide class Auth for authentication account. You can use decorator
 auth_interface to create a function with auto generated authentication.
 """
-import pili.conf as conf
 from urlparse import urlparse
 from .utils import send_and_decode, __hmac_sha1__
 
-class Credentials(object):
+class Mac(object):
     def __init__(self, access_key, secret_key):
         if not (access_key and secret_key):
             raise ValueError('invalid key')
@@ -19,14 +18,14 @@ class Auth(object):
     def __init__(self, access_key, secret_key):
         if not (access_key and secret_key):
             raise ValueError('invalid key')
-        self.__access_key, self.__secret_key = access_key, secret_key
+        self.access_key, self.secret_key = access_key, secret_key
 
     def auth_interface_str(self, raw_str):
         """
         generate sign str.
         """
-        encoded = __hmac_sha1__(raw_str, self.__secret_key)
-        return 'Qiniu {0}:{1}'.format(self.__access_key, encoded)
+        encoded = __hmac_sha1__(raw_str, self.secret_key)
+        return 'Qiniu {0}:{1}'.format(self.access_key, encoded)
 
 def auth_interface(method):
     """
