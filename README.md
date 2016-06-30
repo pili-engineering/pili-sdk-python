@@ -50,8 +50,7 @@
 before next step, install git.
 
 ```
-// install latest version
-$ go get github.com/pili-engineering/pili-sdk-go/pili
+pip install piliv2
 ```
 
 ## Usage
