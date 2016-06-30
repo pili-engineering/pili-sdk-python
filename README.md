@@ -50,7 +50,8 @@
 before next step, install git.
 
 ```
-pip install piliv2
+# install latest version
+$ pip instal piliv2
 ```
 
 ## Usage
@@ -58,25 +59,12 @@ pip install piliv2
 ### Configuration
 
 ```python
-package main
+import pili
 
-import (
-    // ...
-    "github.com/pili-engineering/pili-sdk-go/pili"
-)
+mac = pili.Mac(AccessKey, SecretKey)
+client = pili.Client(mac)
 
-var (
-    AccessKey = "<QINIU ACCESS KEY>" // 替换成自己 Qiniu 账号的 AccessKey.
-    SecretKey = "<QINIU SECRET KEY>" // 替换成自己 Qiniu 账号的 SecretKey.
-    HubName   = "<PILI HUB NAME>"    // Hub 必须事先存在.
-)
-
-func main() {
-    // ...
-    mac = &pili.MAC{AccessKey, []byte(SecretKey)}
-    client = pili.New(mac, nil)
-    // ...
-}
+# ...
 ```
 
 ### URL
@@ -86,9 +74,7 @@ func main() {
 ```python
 url = pili.rtmp_publish_url("publish-rtmp.test.com", "PiliSDKTest", "streamkey", mac, 60)
 fmt.Println(url)
-/*
-rtmp://publish-rtmp.test.com/PiliSDKTest/streamkey?e=1463023142&token=7O7hf7Ld1RrC_fpZdFvU8aCgOPuhw2K4eapYOdII:-5IVlpFNNGJHwv-2qKwVIakC0ME=
-*/
+# rtmp://publish-rtmp.test.com/PiliSDKTest/streamkey?e=1463023142&token=7O7hf7Ld1RrC_fpZdFvU8aCgOPuhw2K4eapYOdII:-5IVlpFNNGJHwv-2qKwVIakC0ME=
 ```
 
 #### Generate RTMP play URL
@@ -96,9 +82,7 @@ rtmp://publish-rtmp.test.com/PiliSDKTest/streamkey?e=1463023142&token=7O7hf7Ld1R
 ```python
 url = pili.rtmp_play_url("live-rtmp.test.com", "PiliSDKTest", "streamkey")
 fmt.Println(url)
-/*
-rtmp://live-rtmp.test.com/PiliSDKTest/streamkey
-*/
+# rtmp://live-rtmp.test.com/PiliSDKTest/streamkey
 ```
 
 #### Generate HLS play URL
@@ -106,9 +90,7 @@ rtmp://live-rtmp.test.com/PiliSDKTest/streamkey
 ```python
 url = pili.hls_play_url("live-hls.test.com", "PiliSDKTest", "streamkey")
 fmt.Println(url)
-/*
-http://live-hls.test.com/PiliSDKTest/streamkey.m3u8
-*/
+# http://live-hls.test.com/PiliSDKTest/streamkey.m3u8
 ```
 
 #### Generate HDL play URL
@@ -116,9 +98,7 @@ http://live-hls.test.com/PiliSDKTest/streamkey.m3u8
 ```python
 url = pili.hdl_play_url("live-hdl.test.com", "PiliSDKTest", "streamkey")
 fmt.Println(url)
-/*
-http://live-hdl.test.com/PiliSDKTest/streamkey.flv
-*/
+# http://live-hdl.test.com/PiliSDKTest/streamkey.flv
 ```
 
 #### Generate Snapshot play URL
@@ -126,9 +106,7 @@ http://live-hdl.test.com/PiliSDKTest/streamkey.flv
 ```python
 url = pili.snapshot_play_url("live-snapshot.test.com", "PiliSDKTest", "streamkey")
 fmt.Println(url)
-/*
-http://live-snapshot.test.com/PiliSDKTest/streamkey.jpg
-*/
+# http://live-snapshot.test.com/PiliSDKTest/streamkey.jpg
 ```
 
 ### Hub
@@ -139,7 +117,7 @@ http://live-snapshot.test.com/PiliSDKTest/streamkey.jpg
 mac = pili.Mac(AccessKey, SecretKey)
 client = pili.Client(mac)
 hub = client.hub("PiliSDKTest")
-// ...
+# ...
 ```
 
 #### Create a new Stream
@@ -148,9 +126,7 @@ hub = client.hub("PiliSDKTest")
 stream = hub.create(key)
 
 print stream.to_json()
-/*
-{"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
-*/
+# {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
 ```
 
 #### Get a Stream
@@ -159,9 +135,7 @@ print stream.to_json()
 stream = hub.get(key)
 
 print stream.to_json()
-/*
-{"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
-*/
+# {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
 ```
 
 #### List Streams
@@ -169,10 +143,8 @@ print stream.to_json()
 ```python
 for s in hub.list()["items"]:
     print s.to_json()
-/*
-{"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
-...
-*/
+# {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
+# ...
 ```
 
 #### List live Streams
@@ -180,10 +152,8 @@ for s in hub.list()["items"]:
 ```python
 for s in hub.list(liveonly=True)["items"]:
     print s.to_json()
-/*
-{"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
-...
-*/
+# {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
+# ...
 ```
 
 ### Stream
@@ -192,9 +162,7 @@ for s in hub.list(liveonly=True)["items"]:
 
 ```python
 print stream.to_json()
-/*
-{"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
-*/
+# {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
 ```
 
 #### Disable a Stream
@@ -203,10 +171,8 @@ print stream.to_json()
 stream.disable()
 
 print stream.to_json()
-/*
-before disable: {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
-after disable: {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": -1, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
-*/
+# before disable: {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
+# after disable: {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": -1, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
 ```
 
 #### Enable a Stream
@@ -215,35 +181,27 @@ after disable: {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": -1
 stream.enable()
 
 print stream.to_json()
-/*
-before disable: {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": -1, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
-after disable: {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
-*/
+# before disable: {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": -1, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
+# after disable: {"expireAt": 1465271243, "hub": "PiliSDKTest", "disabledTill": 0, "key": "streamKey", "updatedAt": 1463975243, "createdAt": 1463975243}
 ```
 
 #### Get Stream live status
 
 ```python
 print stream.status
-/*
-{"startAt": 1463382400, "clientIP": "172.21.1.214:52897" "bps": 128854, "fps": {"audio": 38, "video": 23, "data": 0}}
-*/
+# {"startAt": 1463382400, "clientIP": "172.21.1.214:52897" "bps": 128854, "fps": {"audio": 38, "video": 23, "data": 0}}
 ```
 
 #### Get Stream history activity
 
 ```python
 print stream.history
-/*
-{"items": [{"start": 1463382401, "end": 1463382441}]}
-*/
+# {"items": [{"start": 1463382401, "end": 1463382441}]}
 ```
 
 #### Save Stream live playback
 
 ```python
 print stream.save_as()
-/*
-{"fname": "recordings/z1.PiliSDKTest.streamkey/1463156847_1463157463.m3u8"}
-*/
+# {"fname": "recordings/z1.PiliSDKTest.streamkey/1463156847_1463157463.m3u8"}
 ```
