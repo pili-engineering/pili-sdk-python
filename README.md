@@ -51,7 +51,7 @@ before next step, install git.
 
 ```
 # install latest version
-$ pip instal piliv2
+$ pip install pili2
 ```
 
 ## Usage

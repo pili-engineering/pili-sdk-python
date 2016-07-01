@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = 'piliv2',
+    name = 'pili2',
     version = '2.0.0',
     keywords = ('pili'),
     description = 'Pili Streaming Cloud Server-Side Library For Python',
