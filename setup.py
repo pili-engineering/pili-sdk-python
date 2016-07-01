@@ -4,7 +4,7 @@ setup(
     name = 'piliv2',
     version = '2.0.0',
     keywords = ('pili'),
-    description = 'Pili Streaming Cloud server-side library for Python',
+    description = 'Pili Streaming Cloud Server-Side Library For Python',
     license = 'MIT License',
     install_requires = [],
 
