@@ -73,7 +73,7 @@ client = pili.Client(mac)
 
 ```python
 url = pili.rtmp_publish_url("publish-rtmp.test.com", "PiliSDKTest", "streamkey", mac, 60)
-fmt.Println(url)
+print url
 # rtmp://publish-rtmp.test.com/PiliSDKTest/streamkey?e=1463023142&token=7O7hf7Ld1RrC_fpZdFvU8aCgOPuhw2K4eapYOdII:-5IVlpFNNGJHwv-2qKwVIakC0ME=
 ```
 
@@ -81,7 +81,7 @@ fmt.Println(url)
 
 ```python
 url = pili.rtmp_play_url("live-rtmp.test.com", "PiliSDKTest", "streamkey")
-fmt.Println(url)
+print url
 # rtmp://live-rtmp.test.com/PiliSDKTest/streamkey
 ```
 
@@ -89,7 +89,7 @@ fmt.Println(url)
 
 ```python
 url = pili.hls_play_url("live-hls.test.com", "PiliSDKTest", "streamkey")
-fmt.Println(url)
+print url
 # http://live-hls.test.com/PiliSDKTest/streamkey.m3u8
 ```
 
@@ -97,7 +97,7 @@ fmt.Println(url)
 
 ```python
 url = pili.hdl_play_url("live-hdl.test.com", "PiliSDKTest", "streamkey")
-fmt.Println(url)
+print url
 # http://live-hdl.test.com/PiliSDKTest/streamkey.flv
 ```
 
@@ -105,7 +105,7 @@ fmt.Println(url)
 
 ```python
 url = pili.snapshot_play_url("live-snapshot.test.com", "PiliSDKTest", "streamkey")
-fmt.Println(url)
+print url
 # http://live-snapshot.test.com/PiliSDKTest/streamkey.jpg
 ```
 
