@@ -32,8 +32,7 @@ def get_stream_list(hub, **args):
     url = "http://%s/%s/hubs/%s/streams?" % (conf.API_HOST, conf.API_VERSION, hub)
     for k, v in args.items():
         url += "&%s=%s" % (k, v)
-    req = Request(url=url)
-    return req
+    return Request(url=url)
 
 @auth_interface
 def disable_stream(hub, key, till):
@@ -59,7 +58,9 @@ def save_stream_as(hub, key, **args):
 @auth_interface
 def get_history(hub, key, **args):
     keyword = ['start', 'end']
-    encoded = json.dumps(normalize(args, keyword))
+    args = normalize(args, keyword)
     key = base64.urlsafe_b64encode(key)
-    url = "http://%s/%s/hubs/%s/streams/%s/historyactivity" % (conf.API_HOST, conf.API_VERSION, hub, key)
-    return Request(url=url, data=encoded)
+    url = "http://%s/%s/hubs/%s/streams/%s/historyactivity?" % (conf.API_HOST, conf.API_VERSION, hub, key)
+    for k, v in args.items():
+        url += "&%s=%s" % (k, v)
+    return Request(url=url)
