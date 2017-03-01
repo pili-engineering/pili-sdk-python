@@ -5,11 +5,13 @@ auth_interface to create a function with auto generated authentication.
 from urlparse import urlparse
 from .utils import send_and_decode, __hmac_sha1__
 
+
 class Mac(object):
     def __init__(self, access_key, secret_key):
         if not (access_key and secret_key):
             raise ValueError('invalid key')
         self.__auth__ = Auth(access_key, secret_key)
+
 
 class Auth(object):
     """
@@ -26,6 +28,7 @@ class Auth(object):
         """
         encoded = __hmac_sha1__(raw_str, self.secret_key)
         return 'Qiniu {0}:{1}'.format(self.access_key, encoded)
+
 
 def auth_interface(method):
     """
@@ -49,12 +52,11 @@ def auth_interface(method):
             raw_str += '?%s' % (parsed.query)
         raw_str += '\nHost: %s' % (parsed.netloc)
         if req.has_data():
-            raw_str +=  '\nContent-Type: application/json'
-        raw_str+="\n\n"
+            raw_str += '\nContent-Type: application/json'
+        raw_str += "\n\n"
         if req.has_data():
             raw_str += req.get_data()
             req.add_header('Content-Type', 'application/json')
         req.add_header('Authorization', auth.auth_interface_str(raw_str))
         return send_and_decode(req)
     return authed
-

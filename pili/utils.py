@@ -2,9 +2,13 @@
 Utils
 """
 from urllib2 import urlopen, HTTPError
-import contextlib, json
+import contextlib
+import json
 from .errors import APIError
-import hmac, hashlib, base64
+import hmac
+import hashlib
+import base64
+
 
 def send_and_decode(req):
     """
@@ -30,6 +34,7 @@ def send_and_decode(req):
             raise APIError(res.reason)
         else:
             raise APIError(data["error"])
+
 
 def __hmac_sha1__(data, key):
     """
