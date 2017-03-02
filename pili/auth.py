@@ -5,6 +5,8 @@ auth_interface to create a function with auto generated authentication.
 from urlparse import urlparse
 from .utils import send_and_decode, __hmac_sha1__
 
+import pili.conf as conf
+
 
 class Mac(object):
     def __init__(self, access_key, secret_key):
@@ -58,5 +60,6 @@ def auth_interface(method):
             raw_str += req.get_data()
             req.add_header('Content-Type', 'application/json')
         req.add_header('Authorization', auth.auth_interface_str(raw_str))
+        req.add_header('User-Agent', conf.API_USERAGENT)
         return send_and_decode(req)
     return authed
