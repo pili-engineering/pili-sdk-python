@@ -96,6 +96,7 @@ def stream_saveas(hub, key, **kwargs):
     return Request(url=url, data=encoded)
 
 
+
 @auth_interface
 def stream_snapshot(hub, key, **kwargs):
     keyword = ['time', 'fname', 'format']
