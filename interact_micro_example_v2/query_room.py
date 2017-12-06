@@ -10,6 +10,4 @@ mac = Mac(access_key, secret_key)
 
 room = RoomClient(mac)
 
-print room.get_room_v2('roomname')
-
-
+print room.get_room_v2('roomname3333')
