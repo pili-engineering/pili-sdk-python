@@ -16,5 +16,3 @@ room = RoomClient(mac)
 print room.create_room_v2('admin_user', 'roomname')
 
 print room.room_token_v2('roomname', 'admin_user', 'admin', 3600)
-
-

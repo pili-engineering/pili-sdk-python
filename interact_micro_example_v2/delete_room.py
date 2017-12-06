@@ -13,6 +13,3 @@ mac = Mac(access_key, secret_key)
 room = RoomClient(mac)
 
 print room.delete_room_v2('roomname')
-
-
-
