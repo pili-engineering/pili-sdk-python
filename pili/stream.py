@@ -27,8 +27,8 @@ class Stream(object):
             self.refresh()
         try:
             return self.__data__ if attr == "data" else self.__data__[attr]
-        except:
-            return None
+        except KeyError, e:
+            return e.message
 
     def __repr__(self):
         return self.to_json()

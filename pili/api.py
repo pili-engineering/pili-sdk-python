@@ -122,3 +122,29 @@ def update_stream_converts(hub, key, profiles):
     url = "http://%s/%s/hubs/%s/streams/%s/converts" % (conf.API_HOST, conf.API_VERSION, hub, key)
     encoded = json.dumps({"converts": profiles})
     return Request(url=url, data=encoded)
+
+
+@auth_interface
+def create_room_v2(ownerId, roomName=None):
+    params = {'owner_id': ownerId}
+    url = "http://%s/%s/rooms" % (conf.RTC_API_HOST, conf.API_VERSION)
+    if bool(roomName):
+        params['room_name'] = roomName
+    encoded = json.dumps(params)
+    req = Request(url=url, data=encoded)
+    req.get_method = lambda: 'POST'
+    return req
+
+
+@auth_interface
+def get_room_v2(roomName):
+    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, conf.API_VERSION, roomName)
+    return Request(url=url)
+
+
+@auth_interface
+def delete_room_v2(roomName):
+    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, conf.API_VERSION, roomName)
+    req = Request(url=url)
+    req.get_method = lambda: 'DELETE'
+    return req
