@@ -10,9 +10,13 @@ hub_name = ''
 
 stream_name = ''
 
+key = ''
+
 mac = pili.Mac(access_key, secret_key)
 client = pili.Client(mac)
 hub = client.hub(hub_name)
 stream = hub.get(stream_name)
 
-print(stream.history(start_second=123, end_second=321))
+print stream.saveas(start_second=0, end_second=0, format='', key=key)
+
+
