@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import pili
-import time
 
 access_key = ""
 secret_key = ""
