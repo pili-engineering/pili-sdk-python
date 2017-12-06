@@ -18,5 +18,3 @@ hub = client.hub(hub_name)
 stream = hub.get(stream_name)
 
 print stream.saveas(start_second=0, end_second=0, format='', key=key)
-
-

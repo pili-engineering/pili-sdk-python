@@ -16,6 +16,3 @@ client = pili.Client(mac)
 hub = client.hub(hub_name)
 
 hub.create(stream_name)
-
-
-

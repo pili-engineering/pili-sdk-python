@@ -32,4 +32,3 @@ print pili.hls_play_url(domain, hub_name, stream_title)
 print pili.hdl_play_url(domain, hub_name, stream_title)
 
 print pili.snapshot_play_url(domain, hub_name, stream_title)
-
