@@ -2,8 +2,11 @@
 
 import pili
 
-access_key = ""
-secret_key = ""
+# 替换成自己 Qiniu 账号的 AccessKey
+access_key = "..."
+
+# 替换成自己 Qiniu 账号的 SecretKey
+secret_key = "..."
 
 
 hub_name = ''
