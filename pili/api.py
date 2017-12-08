@@ -147,4 +147,3 @@ def bandwidth_count_detail(hub, time):
     url = "http://%s/%s/hubs/%s/stat/play/history/detail?time=%s" % (conf.API_HOST, conf.API_VERSION, hub, time)
     print url
     return Request(url=url)
-

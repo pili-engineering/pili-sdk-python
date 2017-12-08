@@ -19,5 +19,3 @@ print hub.bandwidth_count_now()
 print hub.bandwidth_count_detail(1512616339)
 
 print hub.bandwidth_count_history(1512616339, 1512616439)
-
-
