@@ -126,6 +126,7 @@ def update_stream_converts(hub, key, profiles):
     encoded = json.dumps({"converts": profiles})
     return Request(url=url, data=encoded)
 
+
 @auth_interface
 def bandwidth_count_now(hub):
     url = "http://%s/%s/hubs/%s/stat/play" % (conf.API_HOST, conf.API_VERSION, hub)
@@ -141,6 +142,7 @@ def bandwidth_count_history(hub, **kwargs):
         url += "&%s=%s" % (k, v)
     print url
     return Request(url=url)
+
 
 @auth_interface
 def bandwidth_count_detail(hub, time):
