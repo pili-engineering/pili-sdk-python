@@ -56,7 +56,8 @@ class Hub(object):
         return res
 
     def bandwidth_count_history(self, start, end, limit=None, marker=None):
-        res = api.bandwidth_count_history(self.__auth__, hub=self.__hub__, start=start, end=end, limit=limit, marker=marker)
+        res = api.bandwidth_count_history(self.__auth__, hub=self.__hub__, start=start, end=end, limit=limit,
+                                          marker=marker)
         return res
 
     def bandwidth_count_detail(self, time):
