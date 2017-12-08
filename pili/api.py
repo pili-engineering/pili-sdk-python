@@ -15,23 +15,26 @@ def normalize(args, keyword):
 
 
 @auth_interface
-def delete_room(roomName):
-    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, conf.RTC_API_VERSION, roomName)
+def delete_room(version, roomName):
+    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, version, roomName)
+    print url
     req = Request(url=url)
     req.get_method = lambda: 'DELETE'
     return req
 
 
 @auth_interface
-def get_room(roomName):
-    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, conf.RTC_API_VERSION, roomName)
+def get_room(version, roomName):
+    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, version, roomName)
+    print url
     return Request(url=url)
 
 
 @auth_interface
-def create_room(ownerId, roomName=None):
+def create_room(ownerId, version, roomName=None):
     params = {'owner_id': ownerId}
-    url = "http://%s/%s/rooms" % (conf.RTC_API_HOST, conf.RTC_API_VERSION)
+    url = "http://%s/%s/rooms" % (conf.RTC_API_HOST, version)
+    print url
     if bool(roomName):
         params['room_name'] = roomName
     encoded = json.dumps(params)

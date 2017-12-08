@@ -11,42 +11,28 @@ class RoomClient(object):
         self.__credentials__ = credentials
         self.__auth__ = credentials.__auth__
 
-    def createRoom(self, ownerId, roomName=None):
-        res = api.create_room(self.__auth__, ownerId=ownerId, roomName=roomName)
+    def createRoom(self, ownerId, roomName=None, version='v1'):
+        res = api.create_room(self.__auth__, ownerId=ownerId, roomName=roomName, version=version)
         return res
 
-    def getRoom(self, roomName):
-        res = api.get_room(self.__auth__, roomName=roomName)
+    def getRoom(self, roomName, version='v1'):
+        res = api.get_room(self.__auth__, roomName=roomName, version=version)
         return res
 
-    def deleteRoom(self, roomName):
-        res = api.delete_room(self.__auth__, roomName=roomName)
+    def deleteRoom(self, roomName, version='v1'):
+        res = api.delete_room(self.__auth__, roomName=roomName, version=version)
         return res
 
-    def create_room_v2(self, ownerId, roomName=None):
-        res = api.create_room_v2(self.__auth__, ownerId=ownerId, roomName=roomName)
-        return res
+    def roomToken(self, roomName, userId, perm, expireAt, version=None):
+        if version == 'v2':
+            params = {"version": "2.0", "room_name": roomName,
+                      "user_id": userId, "perm": perm,
+                      "expire_at": str(expireAt)}
+        else:
+            params = {"room_name": roomName,
+                      "user_id": userId, "perm": perm,
+                      "expire_at": str(expireAt)}
 
-    def get_room_v2(self, roomName):
-        res = api.get_room_v2(self.__auth__, roomName=roomName)
-        return res
-
-    def delete_room_v2(self, roomName):
-        res = api.delete_room_v2(self.__auth__, roomName=roomName)
-        return res
-
-    def roomToken(self, roomName, userId, perm, expireAt):
-        params = '{"room_name":"'+roomName+'","user_id":"'+userId+'","perm":"'+perm+'","expire_at":'+str(expireAt)+'}'
-        roomAccessString = params
-        encodedRoomAccess = base64.urlsafe_b64encode(roomAccessString)
-        hashed = hmac.new(self.__auth__.secret_key, encodedRoomAccess, hashlib.sha1)
-        encodedSign = base64.urlsafe_b64encode(hashed.digest())
-        return self.__auth__.access_key+":"+encodedSign+":"+encodedRoomAccess
-
-    def room_token_v2(self, roomName, userId, perm, expireAt):
-        params = {"version": "2.0", "room_name": roomName,
-                  "user_id": userId, "perm": perm,
-                  "expire_at": str(expireAt)}
         roomAccessString = json.dumps(params)
         encodedRoomAccess = base64.urlsafe_b64encode(roomAccessString)
         hashed = hmac.new(self.__auth__.secret_key, encodedRoomAccess, hashlib.sha1)
