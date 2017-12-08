@@ -125,3 +125,26 @@ def update_stream_converts(hub, key, profiles):
     url = "http://%s/%s/hubs/%s/streams/%s/converts" % (conf.API_HOST, conf.API_VERSION, hub, key)
     encoded = json.dumps({"converts": profiles})
     return Request(url=url, data=encoded)
+
+@auth_interface
+def bandwidth_count_now(hub):
+    url = "http://%s/%s/hubs/%s/stat/play" % (conf.API_HOST, conf.API_VERSION, hub)
+    return Request(url=url)
+
+
+@auth_interface
+def bandwidth_count_history(hub, **kwargs):
+    keyword = ['start', 'end', 'limit', 'marker']
+    args = normalize(kwargs, keyword)
+    url = "http://%s/%s/hubs/%s/stat/play/history" % (conf.API_HOST, conf.API_VERSION, hub)
+    for k, v in args.items():
+        url += "&%s=%s" % (k, v)
+    print url
+    return Request(url=url)
+
+@auth_interface
+def bandwidth_count_detail(hub, time):
+    url = "http://%s/%s/hubs/%s/stat/play/history/detail?time=%s" % (conf.API_HOST, conf.API_VERSION, hub, time)
+    print url
+    return Request(url=url)
+
