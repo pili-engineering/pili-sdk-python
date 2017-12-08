@@ -15,23 +15,26 @@ def normalize(args, keyword):
 
 
 @auth_interface
-def delete_room(roomName):
-    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, conf.RTC_API_VERSION, roomName)
+def delete_room(version, roomName):
+    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, version, roomName)
+    print url
     req = Request(url=url)
     req.get_method = lambda: 'DELETE'
     return req
 
 
 @auth_interface
-def get_room(roomName):
-    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, conf.RTC_API_VERSION, roomName)
+def get_room(version, roomName):
+    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, version, roomName)
+    print url
     return Request(url=url)
 
 
 @auth_interface
-def create_room(ownerId, roomName=None):
+def create_room(ownerId, version, roomName=None):
     params = {'owner_id': ownerId}
-    url = "http://%s/%s/rooms" % (conf.RTC_API_HOST, conf.RTC_API_VERSION)
+    url = "http://%s/%s/rooms" % (conf.RTC_API_HOST, version)
+    print url
     if bool(roomName):
         params['room_name'] = roomName
     encoded = json.dumps(params)
@@ -125,26 +128,24 @@ def update_stream_converts(hub, key, profiles):
 
 
 @auth_interface
-def create_room_v2(ownerId, roomName=None):
-    params = {'owner_id': ownerId}
-    url = "http://%s/%s/rooms" % (conf.RTC_API_HOST, conf.API_VERSION)
-    if bool(roomName):
-        params['room_name'] = roomName
-    encoded = json.dumps(params)
-    req = Request(url=url, data=encoded)
-    req.get_method = lambda: 'POST'
-    return req
-
-
-@auth_interface
-def get_room_v2(roomName):
-    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, conf.API_VERSION, roomName)
+def bandwidth_count_now(hub):
+    url = "http://%s/%s/hubs/%s/stat/play" % (conf.API_HOST, conf.API_VERSION, hub)
     return Request(url=url)
 
 
 @auth_interface
-def delete_room_v2(roomName):
-    url = "http://%s/%s/rooms/%s" % (conf.RTC_API_HOST, conf.API_VERSION, roomName)
-    req = Request(url=url)
-    req.get_method = lambda: 'DELETE'
-    return req
+def bandwidth_count_history(hub, **kwargs):
+    keyword = ['start', 'end', 'limit', 'marker']
+    args = normalize(kwargs, keyword)
+    url = "http://%s/%s/hubs/%s/stat/play/history" % (conf.API_HOST, conf.API_VERSION, hub)
+    for k, v in args.items():
+        url += "&%s=%s" % (k, v)
+    print url
+    return Request(url=url)
+
+
+@auth_interface
+def bandwidth_count_detail(hub, time):
+    url = "http://%s/%s/hubs/%s/stat/play/history/detail?time=%s" % (conf.API_HOST, conf.API_VERSION, hub, time)
+    print url
+    return Request(url=url)

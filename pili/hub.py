@@ -50,3 +50,16 @@ class Hub(object):
     def batch_live_status(self, streams):
         res = api.batch_live_status(self.__auth__, hub=self.__hub__, streams=streams)
         return res["items"]
+
+    def bandwidth_count_now(self):
+        res = api.bandwidth_count_now(self.__auth__, hub=self.__hub__)
+        return res
+
+    def bandwidth_count_history(self, start, end, limit=None, marker=None):
+        res = api.bandwidth_count_history(self.__auth__, hub=self.__hub__, start=start, end=end, limit=limit,
+                                          marker=marker)
+        return res
+
+    def bandwidth_count_detail(self, time):
+        res = api.bandwidth_count_detail(self.__auth__, hub=self.__hub__, time=time)
+        return res
