@@ -15,4 +15,4 @@ room = RoomClient(mac)
 
 # print room.createRoom('admin_user', 'roomname2222')
 
-print room.roomToken('roomname', 'admin_user', 'admin', 3600, 2)
+print room.roomToken('roomname', 'admin_user', 'admin', 3600)
