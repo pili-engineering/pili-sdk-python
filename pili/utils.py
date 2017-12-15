@@ -42,3 +42,16 @@ def __hmac_sha1__(data, key):
     """
     hashed = hmac.new(key, data, hashlib.sha1)
     return base64.urlsafe_b64encode(hashed.digest())
+
+
+def b(data):
+    return bytes(data)
+
+
+def s(data):
+    return bytes(data)
+
+
+def urlsafe_base64_encode(data):
+    ret = base64.urlsafe_b64encode(b(data))
+    return s(ret)
