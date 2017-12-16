@@ -24,13 +24,11 @@ class RoomClient(object):
         return res
 
     def roomToken(self, roomName, userId, perm, expireAt, version=None):
-        params = {"room_name": roomName,
-                      "user_id": userId, "perm": perm,
-                      "expire_at": expireAt}
+        params = {"room_name": roomName, "user_id": userId, "perm": perm, "expire_at": expireAt}
         if version == 'v2':
-            params["version"]="2.0"
+            params["version"] = "2.0"
             
-        roomAccessString = json.dumps(params,separators=(',',':'))
+        roomAccessString = json.dumps(params, separators=(',', ':'))
         encodedRoomAccess = base64.urlsafe_b64encode(roomAccessString)
         hashed = hmac.new(self.__auth__.secret_key, encodedRoomAccess, hashlib.sha1)
         encodedSign = base64.urlsafe_b64encode(hashed.digest())
