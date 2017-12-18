@@ -8,11 +8,11 @@ access_key = "..."
 # 替换成自己 Qiniu 账号的 SecretKey
 secret_key = "..."
 
-domain = ''
+domain = '...'
 
-hub_name = ''
+hub_name = '...'
 
-stream_title = ''
+stream_title = '...'
 
 expire = 3600
 
@@ -22,7 +22,7 @@ client = pili.Client(mac)
 hub = client.hub(hub_name)
 
 
-stream = hub.get("")
+stream = hub.get("...")
 
 
 print pili.rtmp_publish_url(domain, hub_name, stream_title, mac, expire)

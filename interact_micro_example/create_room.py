@@ -13,6 +13,6 @@ mac = Mac(access_key, secret_key)
 
 room = RoomClient(mac)
 
-# print room.createRoom('admin_user', 'roomname2222')
+print room.createRoom('admin_user', 'roomname')
 
-print room.roomToken('roomname', 'admin_user', 'admin', 3600)
+# print room.roomToken('roomname', 'admin_user', 'admin', 36000)
