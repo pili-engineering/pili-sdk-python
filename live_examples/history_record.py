@@ -5,13 +5,14 @@ import pili
 # 替换成自己 Qiniu 账号的 AccessKey
 access_key = "..."
 
+
 # 替换成自己 Qiniu 账号的 SecretKey
 secret_key = "..."
 
 
-hub_name = ''
+hub_name = '...'
 
-stream_name = ''
+stream_name = '...'
 
 mac = pili.Mac(access_key, secret_key)
 client = pili.Client(mac)

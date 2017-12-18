@@ -31,14 +31,12 @@ def get_room(version, roomName):
 @auth_interface
 def get_user(version, roomName):
     url = "http://%s/%s/rooms/%s/users" % (conf.RTC_API_HOST, version, roomName)
-    print url
     return Request(url=url)
 
 
 @auth_interface
-def delete_user(version, roomName, userId):
+def kick_user(version, roomName, userId):
     url = "http://%s/%s/rooms/%s/users/%s" % (conf.RTC_API_HOST, version, roomName, userId)
-    print url
     req = Request(url=url)
     req.get_method = lambda: 'DELETE'
     return req
@@ -153,12 +151,10 @@ def bandwidth_count_history(hub, **kwargs):
     url = "http://%s/%s/hubs/%s/stat/play/history" % (conf.API_HOST, conf.API_VERSION, hub)
     for k, v in args.items():
         url += "&%s=%s" % (k, v)
-    print url
     return Request(url=url)
 
 
 @auth_interface
 def bandwidth_count_detail(hub, time):
     url = "http://%s/%s/hubs/%s/stat/play/history/detail?time=%s" % (conf.API_HOST, conf.API_VERSION, hub, time)
-    print url
     return Request(url=url)

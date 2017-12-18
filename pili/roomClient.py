@@ -12,27 +12,27 @@ class RoomClient(object):
         self.__credentials__ = credentials
         self.__auth__ = credentials.__auth__
 
-    def createRoom(self, ownerId, roomName=None, version='v1'):
+    def createRoom(self, ownerId, roomName=None, version='v2'):
         res = api.create_room(self.__auth__, ownerId=ownerId, roomName=roomName, version=version)
         return res
 
-    def getRoom(self, roomName, version='v1'):
+    def getRoom(self, roomName, version='v2'):
         res = api.get_room(self.__auth__, roomName=roomName, version=version)
         return res
 
-    def deleteRoom(self, roomName, version='v1'):
+    def deleteRoom(self, roomName, version='v2'):
         res = api.delete_room(self.__auth__, roomName=roomName, version=version)
         return res
 
-    def getUser(self, roomName, version='v1'):
+    def getUser(self, roomName, version='v2'):
         res = api.get_user(self.__auth__, roomName=roomName, version=version)
         return res
 
-    def deleteUser(self, roomName, userId, version='v1'):
-        res = api.delete_user(self.__auth__, roomName=roomName, userId=userId, version=version)
+    def kickUser(self, roomName, userId, version='v2'):
+        res = api.kick_user(self.__auth__, roomName=roomName, userId=userId, version=version)
         return res
 
-    def roomToken(self, roomName, userId, perm, expireAt, version=None):
+    def roomToken(self, roomName, userId, perm, expireAt, version='v2'):
         if version == 'v2':
             params = {"version": "2.0", "room_name": roomName,
                       "user_id": userId, "perm": perm,
