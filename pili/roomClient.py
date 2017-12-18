@@ -24,7 +24,6 @@ class RoomClient(object):
         res = api.delete_room(self.__auth__, roomName=roomName, version=version)
         return res
 
-
     def getUser(self, roomName, version='v2'):
         res = api.get_user(self.__auth__, roomName=roomName, version=version)
         return res
