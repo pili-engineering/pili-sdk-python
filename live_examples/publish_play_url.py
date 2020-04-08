@@ -27,6 +27,8 @@ stream = hub.get("...")
 
 print pili.rtmp_publish_url(domain, hub_name, stream_title, mac, expire)
 
+print pili.rtmp_publish_url_v1(domain, hub_name, stream_title, expire, publishKey)
+
 print pili.rtmp_play_url(domain, hub_name, stream_title)
 
 print pili.hls_play_url(domain, hub_name, stream_title)

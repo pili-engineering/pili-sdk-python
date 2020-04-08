@@ -9,6 +9,13 @@ def rtmp_publish_url(domain, hub, stream_title, mac, expire):
     return url
 
 
+def rtmp_publish_url_v1(domain, hub, stream_title, expire, publishKey):
+    path = "/%s/%s?expire=%d" % (hub, stream_title, time.time()+expire)
+    token = __hmac_sha1__(path, publishKey)
+    url = "rtmp://%s%s&token=%s" % (domain, path, token)
+    return url
+
+
 def rtmp_play_url(domain, hub, stream_title):
     return "rtmp://%s/%s/%s" % (domain, hub, stream_title)
 
